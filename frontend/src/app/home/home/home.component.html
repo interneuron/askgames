@@ -1,0 +1,16 @@
+<div class="main-container">
+  <div class="filters">
+    <ul>
+      <li><a href="" class="-active">Latest</a></li>
+      <li><a href="">Subscriptions</a></li>
+      <li><a href="">Featured</a></li>
+      <li><a href="">Needs help</a></li>
+    </ul>
+  </div>
+  <div class="topics">
+    <div *ngFor="let topic of topics" class="topic">
+      <h2>{{ topic.title }}</h2>
+      <p>{{ topic.text }}</p>
+    </div>
+  </div>
+</div>

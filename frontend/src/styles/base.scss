@@ -1,0 +1,24 @@
+/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css?family=Fira+Sans:300,400,600&subset=cyrillic');
+@import "params";
+
+html {
+  background: $colorBg;
+  color: #ffffff;
+  font-family: Fira Sans, sans-serif;
+  font-size: 13px;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  color: #a8b6f4;
+  text-decoration: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 400;
+}

@@ -1,0 +1,46 @@
+@import "params";
+@import "container";
+
+:host {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.filters {
+  flex-shrink: 0;
+  width: 200px;
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: $grid * 4 0;
+    li {
+      a {
+        display: block;
+        padding: $grid;
+        &.-active {
+          background: $colorLightBg;
+          border: 3px;
+        }
+      }
+    }
+  }
+}
+
+.topics {
+  flex-grow: 1;
+  padding: 0 $grid * 2;
+  .topic {
+    background: $colorLightBg;
+    border: 1px solid $colorLightBorder;
+    border-radius: 4px;
+    box-shadow: $tileShadow;
+    margin: $grid * 4 0;
+    padding: $grid * 2;
+  }
+}

@@ -1,0 +1,18 @@
+@import "params";
+@import "container";
+
+:host {
+  align-items: center;
+  background: #2b2a4a;
+  box-shadow: $deepShadow;
+  display: flex;
+  flex-direction: column;
+  padding: $grid * 2 $grid * 4;
+}
+
+.brand {
+  color: #fed057;
+  font-size: 1.4rem;
+  font-weight: 700;
+  text-decoration: none;
+}
