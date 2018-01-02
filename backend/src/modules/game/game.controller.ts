@@ -1,10 +1,10 @@
 import { Controller, Get } from '@nestjs/common';
 import { Game } from './game.entity';
-import { GamesService } from './games.service';
+import { GameService } from './game.service';
 
 @Controller('games')
-export class GamesController {
-  constructor(private service: GamesService) {
+export class GameController {
+  constructor(private service: GameService) {
   }
 
   @Get('list')

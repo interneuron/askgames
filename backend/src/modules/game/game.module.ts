@@ -1,20 +1,20 @@
 import { Module } from '@nestjs/common';
 import { DbModule } from '../db/db.module';
 import { gameProviders } from './game.providers';
-import { GamesController } from './games.controller';
-import { GamesService } from './games.service';
+import { GameController } from './game.controller';
+import { GameService } from './game.service';
 
 @Module({
   modules: [
     DbModule,
   ],
   controllers: [
-    GamesController,
+    GameController,
   ],
   components: [
     ...gameProviders,
-    GamesService,
+    GameService,
   ],
 })
-export class GamesModule {
+export class GameModule {
 }

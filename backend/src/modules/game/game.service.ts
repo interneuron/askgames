@@ -4,7 +4,7 @@ import { Game } from './game.entity';
 import { gameRepositoryToken } from './meta';
 
 @Component()
-export class GamesService {
+export class GameService {
   constructor(
       @Inject(gameRepositoryToken) private readonly gameRepository: Repository<Game>) {
   }
