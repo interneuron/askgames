@@ -5,6 +5,11 @@ $mainWidth: 1000px;
 $colorBg: #24263b;
 $colorLightBg: #2c2e47;
 $colorLightBorder: #373a5d;
+$colorPrimary: #898cf9;
+$colorPrimaryFocus: #6f72d3;
+$colorPrimaryActive: #6f72d3;
 
-$deepShadow: 0 0 40px rgba(0, 0, 0, 0.6);
-$tileShadow: 0 0 45px rgba(0, 0, 0, 0.2);
+$deepShadow: 0 0 40px rgba(0, 0, 0, .6);
+$tileShadow: 0 0 45px rgba(0, 0, 0, .2);
+$smallShadow: 1px 1px 5px rgba(0, 0, 0, .6);
+$smallHoverShadow: 2px 2px 20px rgba(0, 0, 0, .9);

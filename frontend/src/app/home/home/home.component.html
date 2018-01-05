@@ -8,9 +8,14 @@
     </ul>
   </div>
   <div class="topics">
-    <div *ngFor="let topic of topics" class="topic">
-      <h2>{{ topic.title }}</h2>
-      <p>{{ topic.text }}</p>
-    </div>
+    <ng-container *ngIf="data">
+      <div *ngFor="let topic of data.latestTopics" class="topic">
+        <h2>
+          <a [routerLink]="topic.game | gameUrl">{{ topic.game.name }}</a>
+          &rarr;
+          <a [routerLink]="topic | topicUrl">{{ topic.title }}</a></h2>
+        <p>{{ topic.text }}</p>
+      </div>
+    </ng-container>
   </div>
 </div>

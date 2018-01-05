@@ -8,7 +8,9 @@
     "build": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "graphql:gen:schema": "apollo-codegen introspect-schema http://localhost:3000/graphql --output schema.json",
+    "graphql:gen:meta": "apollo-codegen generate **/*.graphql.ts --schema schema.json --target typescript --output ./src/app/graphql-meta.ts"
   },
   "private": true,
   "dependencies": {
@@ -23,7 +25,13 @@
     "@angular/router": "^5.0.0",
     "@ngrx/store": "^4.1.1",
     "@ngx-kit/core": "^1.0.0",
+    "apollo-angular": "^1.0.0",
+    "apollo-angular-link-http": "^1.0.1",
+    "apollo-cache-inmemory": "^1.1.4",
+    "apollo-client": "^2.0.4",
     "core-js": "^2.4.1",
+    "graphql": "^0.12.3",
+    "graphql-tag": "^2.6.1",
     "rxjs": "^5.5.2",
     "zone.js": "^0.8.14"
   },
@@ -31,7 +39,7 @@
     "@angular/cli": "1.6.1",
     "@angular/compiler-cli": "^5.0.0",
     "@angular/language-service": "^5.0.0",
-    "@ngx-kit/collection": "^1.0.0",
+    "@ngx-kit/collection": "github:ngx-kit/collection-builds#test+907273e",
     "@types/jasmine": "~2.5.53",
     "@types/jasminewd2": "~2.0.2",
     "@types/node": "~6.0.60",

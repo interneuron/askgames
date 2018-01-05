@@ -2,4 +2,6 @@
 
 .main-container {
   width: $mainWidth;
+  display: flex;
+  flex-direction: column;
 }

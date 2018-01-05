@@ -1,0 +1,17 @@
+type Topic {
+    id: Int!
+    gameId: Int
+    title: String
+    text: String
+    game: Game
+}
+
+type Game {
+    id: Int!
+    name: String
+}
+
+type Query {
+    topic(id: Int!): Topic
+    latestTopics: [Topic]
+}
