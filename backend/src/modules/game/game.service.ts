@@ -1,15 +1,19 @@
 import { Component, Inject } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { Game } from './game.entity';
-import { gameRepositoryToken } from './meta';
+import { gameRepoToken } from './meta';
 
 @Component()
 export class GameService {
   constructor(
-      @Inject(gameRepositoryToken) private readonly gameRepository: Repository<Game>) {
+      @Inject(gameRepoToken) private readonly gameRepo: Repository<Game>) {
   }
 
   async findAll(): Promise<Game[]> {
-    return await this.gameRepository.find({take: 50});
+    return await this.gameRepo.find({take: 50});
+  }
+
+  async findById(id: number): Promise<Game> {
+    return await this.gameRepo.findOne({id});
   }
 }

@@ -1,1 +1,1 @@
-export const gameRepositoryToken = 'gameRepositoryToken';
+export const gameRepoToken = 'gameRepositoryToken';
