@@ -2,11 +2,8 @@
 @import "container";
 
 :host {
-  align-items: center;
   background: #2b2a4a;
   box-shadow: $deepShadow;
-  display: flex;
-  flex-direction: column;
   padding: $grid * 2 $grid * 4;
 }
 

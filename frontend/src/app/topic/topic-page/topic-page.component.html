@@ -1,0 +1,26 @@
+<ng-container *ngIf="data | async; let data">
+  <div class="main-container breadcrumb">
+    <a routerLink="/">AskGames</a> &rarr;
+    <a routerLink="/">{{ data.topic.game.name }}</a> &rarr;
+    <a [routerLink]="data.topic | topicUrl">Question</a>
+  </div>
+  <div class="main-container">
+    <div class="main">
+      <div class="topic">
+        <div class="author">{{ data.topic.author.name }}</div>
+        <h1>{{ data.topic.title }}</h1>
+        <div>
+          {{ data.topic.text }}
+        </div>
+      </div>
+      <div class="answers">
+        <h3>Answers</h3>
+        <div *ngFor="let answer of data.topic.answers" class="answer">
+          <div class="author">{{ answer.author.name }}</div>
+          {{ answer.text }}
+        </div>
+      </div>
+    </div>
+    <div class="side"></div>
+  </div>
+</ng-container>

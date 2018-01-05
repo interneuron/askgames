@@ -1,5 +1,11 @@
 @import "params";
 
+:host {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
 .main-container {
   width: $mainWidth;
   display: flex;

@@ -1,0 +1,15 @@
+@import "params";
+@import "container";
+
+.main-container {
+  flex-direction: row;
+}
+
+.main {
+  flex-grow: 1;
+}
+
+.side {
+  flex-shrink: 0;
+  width: 250px;
+}

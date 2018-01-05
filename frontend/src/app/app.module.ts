@@ -10,7 +10,7 @@ import { InMemoryCache } from 'apollo-cache-inmemory';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderModule } from './header/header.module';
-import { TopicModule } from './topic/topic.module';
+import { TopicForRootModule } from './topic/topic-for-root.module';
 import { UiLoadingBarModule } from './ui/ui-loading-bar/ui-loading-bar.module';
 
 @NgModule({
@@ -29,7 +29,7 @@ import { UiLoadingBarModule } from './ui/ui-loading-bar/ui-loading-bar.module';
     HttpLinkModule,
     AppRoutingModule,
     HeaderModule,
-    TopicModule.forRoot(),
+    TopicForRootModule,
     UiLoadingBarModule,
   ],
   providers: [],

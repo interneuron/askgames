@@ -1,20 +1,18 @@
 import { CommonModule } from '@angular/common';
-import { ModuleWithProviders, NgModule } from '@angular/core';
-import { TopicService } from './topic.service';
+import { NgModule } from '@angular/core';
+import { TopicPageComponent } from './topic-page/topic-page.component';
+import { TopicRoutingModule } from './topic-routing.module';
+import { TopicUrlModule } from './topic-url/topic-url.module';
 
 @NgModule({
   imports: [
     CommonModule,
+    TopicRoutingModule,
+    TopicUrlModule,
   ],
-  declarations: [],
+  declarations: [
+    TopicPageComponent,
+  ],
 })
 export class TopicModule {
-  static forRoot(): ModuleWithProviders {
-    return {
-      ngModule: TopicModule,
-      providers: [
-        TopicService,
-      ],
-    };
-  }
 }

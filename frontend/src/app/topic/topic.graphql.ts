@@ -13,3 +13,29 @@ export const getLatestTopics = gql`
     }
   }
 `;
+
+export const getTopic = gql`
+  query getTopic($id: Int!) {
+    topic(id: $id) {
+      id
+      title
+      text
+      game {
+        id
+        name
+      }
+      author {
+        id
+        name
+      }
+      answers {
+        id
+        text
+        author {
+          id
+          name
+        }
+      }
+    }
+  }
+`;

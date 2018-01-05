@@ -3,7 +3,6 @@ import { KitLoadingBarService } from '@ngx-kit/core';
 import { Apollo } from 'apollo-angular';
 import { getLatestTopicsQuery } from '../../graphql-meta';
 import { getLatestTopics } from '../../topic/topic.graphql';
-import { TopicService } from '../../topic/topic.service';
 
 @Component({
   selector: 'app-home',
@@ -14,7 +13,6 @@ export class HomeComponent implements OnInit {
   data: getLatestTopicsQuery;
 
   constructor(
-    private topicService: TopicService,
     private apollo: Apollo,
     private loadingBar: KitLoadingBarService,
   ) {

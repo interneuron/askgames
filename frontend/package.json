@@ -9,6 +9,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
+    "graphql:gen": "npm run graphql:gen:schema && npm run graphql:gen:meta",
     "graphql:gen:schema": "apollo-codegen introspect-schema http://localhost:3000/graphql --output schema.json",
     "graphql:gen:meta": "apollo-codegen generate **/*.graphql.ts --schema schema.json --target typescript --output ./src/app/graphql-meta.ts"
   },
