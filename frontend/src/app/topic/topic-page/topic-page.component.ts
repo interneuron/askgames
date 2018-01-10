@@ -4,7 +4,6 @@ import { KitLoadingBarService } from '@ngx-kit/core';
 import { Apollo } from 'apollo-angular';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { distinctUntilChanged, map, pluck, switchMap, tap } from 'rxjs/operators';
-import { Subject } from 'rxjs/Subject';
 import { getTopicQuery } from '../../graphql-meta';
 import { getTopic } from '../topic.graphql';
 

@@ -1,23 +1,16 @@
 import { ResolveProperty, Resolver } from '@nestjs/graphql';
 import { AccountService } from '../account/account.service';
 import { TopicAnswer } from './topic-answer.entity';
-import { TopicService } from './topic.service';
 
-@Resolver('TopicAnswer')
-export class TopicAnswerResolver {
+@Resolver('TopicComment')
+export class TopicCommentResolver {
   constructor(
       private accountService: AccountService,
-      private topicService: TopicService,
   ) {
   }
 
   @ResolveProperty()
   author(topicAnswer: TopicAnswer) {
     return this.accountService.findById(topicAnswer.accountId);
-  }
-
-  @ResolveProperty()
-  comments(topicAnswer: TopicAnswer) {
-    return this.topicService.findCommentsByAnswerId(topicAnswer.id);
   }
 }

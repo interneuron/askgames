@@ -4,8 +4,9 @@ type Topic {
     title: String
     text: String
     game: Game
-    answers: [TopicAnswer]
     author: Account
+    answers: [TopicAnswer]
+    comments: [TopicComment]
 }
 
 type Game {
@@ -17,6 +18,13 @@ type TopicAnswer {
     id: Int!
     text: String
     rate: Int
+    author: Account
+    comments: [TopicComment]
+}
+
+type TopicComment {
+    id: Int!
+    text: String
     author: Account
 }
 

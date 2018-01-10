@@ -28,12 +28,28 @@ export const getTopic = gql`
         id
         name
       }
+      comments {
+        id
+        text
+        author {
+          id
+          name
+        }        
+      }
       answers {
         id
         text
         author {
           id
           name
+        }
+        comments {
+          id
+          text
+          author {
+            id
+            name
+          }
         }
       }
     }

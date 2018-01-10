@@ -13,11 +13,23 @@
           {{ data.topic.text }}
         </div>
       </div>
+      <div class="comments" *ngIf="data.topic.comments">
+        <h4>Comments</h4>
+        <div *ngFor="let comment of data.topic.comments" class="comment">
+          {{ comment.author.name }}: {{ comment.text }}
+        </div>
+      </div>
       <div class="answers">
         <h3>Answers</h3>
         <div *ngFor="let answer of data.topic.answers" class="answer">
           <div class="author">{{ answer.author.name }}</div>
           {{ answer.text }}
+          <div class="comments" *ngIf="answer.comments">
+            <h4>Comments</h4>
+            <div *ngFor="let comment of answer.comments" class="comment">
+              {{ comment.author.name }}: {{ comment.text }}
+            </div>
+          </div>
         </div>
       </div>
     </div>

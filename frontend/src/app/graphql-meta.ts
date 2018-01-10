@@ -30,6 +30,14 @@ export interface getTopicQuery {
       id: number,
       name: string | null,
     } | null,
+    comments:  Array< {
+      id: number,
+      text: string | null,
+      author:  {
+        id: number,
+        name: string | null,
+      } | null,
+    } | null > | null,
     answers:  Array< {
       id: number,
       text: string | null,
@@ -37,6 +45,14 @@ export interface getTopicQuery {
         id: number,
         name: string | null,
       } | null,
+      comments:  Array< {
+        id: number,
+        text: string | null,
+        author:  {
+          id: number,
+          name: string | null,
+        } | null,
+      } | null > | null,
     } | null > | null,
   } | null,
 };

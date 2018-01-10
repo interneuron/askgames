@@ -37,4 +37,9 @@ export class TopicResolver {
   author(topic: Topic) {
     return this.accountService.findById(topic.accountId);
   }
+
+  @ResolveProperty()
+  comments(topic: Topic) {
+    return this.topicService.findCommentsByTopicId(topic.id);
+  }
 }
