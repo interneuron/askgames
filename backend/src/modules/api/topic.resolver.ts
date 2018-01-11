@@ -1,8 +1,8 @@
 import { Query, ResolveProperty, Resolver } from '@nestjs/graphql';
 import { AccountService } from '../account/account.service';
 import { GameService } from '../game/game.service';
-import { Topic } from './topic.entity';
-import { TopicService } from './topic.service';
+import { Topic } from '../topic/topic.entity';
+import { TopicService } from '../topic/topic.service';
 
 @Resolver('Topic')
 export class TopicResolver {
@@ -20,7 +20,11 @@ export class TopicResolver {
 
   @Query()
   latestTopics(obj, args) {
-    return this.topicService.findLatest();
+    const params: any = {};
+    if (args.gameId) {
+      params.gameId = args.gameId;
+    }
+    return this.topicService.findLatest(20, params);
   }
 
   @ResolveProperty()

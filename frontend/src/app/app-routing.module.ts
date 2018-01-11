@@ -10,6 +10,10 @@ const routes: Routes = [
     path: 'q',
     loadChildren: './topic/topic.module#TopicModule',
   },
+  {
+    path: 'game',
+    loadChildren: './game/game.module#GameModule',
+  },
 ];
 
 @NgModule({

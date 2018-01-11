@@ -12,6 +12,9 @@ services:
      - MYSQL_USER=local
      - MYSQL_PASSWORD=1234
     volumes:
-      - "./data/db/mysql:/var/lib/mysql"
+      - lph-mysql:/var/lib/mysql
 networks:
   main:
+volumes:
+  lph-mysql:
+    external: true

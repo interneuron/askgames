@@ -35,5 +35,6 @@ type Account {
 
 type Query {
     topic(id: Int!): Topic
-    latestTopics: [Topic]
+    latestTopics(gameId: Int): [Topic]
+    game(id: Int!): Game
 }

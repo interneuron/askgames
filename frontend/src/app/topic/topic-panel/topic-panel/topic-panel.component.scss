@@ -1,0 +1,11 @@
+@import "params";
+
+:host {
+  background: $colorLightBg;
+  border: 1px solid $colorLightBorder;
+  border-radius: 4px;
+  box-shadow: $tileShadow;
+  display: block;
+  margin: $grid * 4 0;
+  padding: $grid * 2;
+}

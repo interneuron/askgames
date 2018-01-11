@@ -1,17 +1,13 @@
 import { MiddlewaresConsumer, Module, NestModule, RequestMethod } from '@nestjs/common';
 import { GraphQLFactory, GraphQLModule } from '@nestjs/graphql';
 import { graphiqlExpress, graphqlExpress } from 'apollo-server-express';
-import { AccountModule } from './account/account.module';
+import { ApiModule } from './api/api.module';
 import { AppController } from './app.controller';
-import { GameModule } from './game/game.module';
-import { TopicModule } from './topic/topic.module';
 
 @Module({
   imports: [
     GraphQLModule,
-    AccountModule,
-    GameModule,
-    TopicModule,
+    ApiModule,
   ],
   controllers: [
     AppController,

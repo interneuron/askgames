@@ -1,6 +1,6 @@
 import { ResolveProperty, Resolver } from '@nestjs/graphql';
 import { AccountService } from '../account/account.service';
-import { TopicAnswer } from './topic-answer.entity';
+import { TopicAnswer } from '../topic/topic-answer.entity';
 
 @Resolver('TopicComment')
 export class TopicCommentResolver {

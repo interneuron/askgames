@@ -1,0 +1,10 @@
+@import "params";
+
+:host {
+  display: block;
+  padding: $grid;
+  &.-active {
+    background: $colorLightBg;
+    border: 3px;
+  }
+}

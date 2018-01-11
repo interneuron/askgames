@@ -14,10 +14,10 @@ export class TopicService {
   ) {
   }
 
-  async findLatest(take = 20): Promise<Topic[]> {
+  async findLatest(take, params: any): Promise<Topic[]> {
     return await this.topicRepo.find({
       take,
-      where: {block: false},
+      where: {block: false, ...params},
       order: {datetime: 'DESC'},
     });
   }

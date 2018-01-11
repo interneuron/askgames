@@ -5,12 +5,15 @@
   flex-direction: row;
 }
 
-.filters {
+.head {
+}
+
+.side {
   flex-shrink: 0;
   padding: $grid * 4 $grid * 4 0 0;
   width: 200px;
 }
 
-.topics {
+.main {
   flex-grow: 1;
 }

@@ -1,7 +1,7 @@
 import { ResolveProperty, Resolver } from '@nestjs/graphql';
 import { AccountService } from '../account/account.service';
-import { TopicAnswer } from './topic-answer.entity';
-import { TopicService } from './topic.service';
+import { TopicAnswer } from '../topic/topic-answer.entity';
+import { TopicService } from '../topic/topic.service';
 
 @Resolver('TopicAnswer')
 export class TopicAnswerResolver {

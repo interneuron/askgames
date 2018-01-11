@@ -1,0 +1,5 @@
+<h2>
+  <a [routerLink]="topic.game | gameUrl">{{ topic.game.name }}</a>
+  &rarr;
+  <a [routerLink]="topic | topicUrl">{{ topic.title }}</a></h2>
+<p>{{ topic.text }}</p>

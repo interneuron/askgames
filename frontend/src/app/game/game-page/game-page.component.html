@@ -1,0 +1,20 @@
+<ng-container *ngIf="gameData | async; let gameData">
+  <div class="main-container head">
+    <h1>{{ gameData.game.name }}</h1>
+  </div>
+  <div class="main-container">
+    <div class="side">
+      <ui-side-nav>
+        <a uiSideNavItem routerLink="/" class="-active">All</a>
+        <a uiSideNavItem routerLink="/">Needs help</a>
+      </ui-side-nav>
+    </div>
+    <div class="main">
+      <ng-container *ngIf="topicsData | async; let topicsData">
+        <app-topic-panel *ngFor="let topic of topicsData.latestTopics"
+                         [topic]="topic">
+        </app-topic-panel>
+      </ng-container>
+    </div>
+  </div>
+</ng-container>

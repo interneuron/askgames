@@ -1,21 +1,17 @@
 <div class="main-container">
   <div class="filters">
-    <ul>
-      <li><a href="" class="-active">Latest</a></li>
-      <li><a href="">Subscriptions</a></li>
-      <li><a href="">Featured</a></li>
-      <li><a href="">Needs help</a></li>
-    </ul>
+    <ui-side-nav>
+      <a uiSideNavItem routerLink="/" class="-active">Latest</a>
+      <a uiSideNavItem routerLink="/">Subscriptions</a>
+      <a uiSideNavItem routerLink="/">Featured</a>
+      <a uiSideNavItem routerLink="/">Needs help</a>
+    </ui-side-nav>
   </div>
   <div class="topics">
     <ng-container *ngIf="data">
-      <div *ngFor="let topic of data.latestTopics" class="topic">
-        <h2>
-          <a [routerLink]="topic.game | gameUrl">{{ topic.game.name }}</a>
-          &rarr;
-          <a [routerLink]="topic | topicUrl">{{ topic.title }}</a></h2>
-        <p>{{ topic.text }}</p>
-      </div>
+      <app-topic-panel *ngFor="let topic of data.latestTopics"
+                       [topic]="topic">
+      </app-topic-panel>
     </ng-container>
   </div>
 </div>
