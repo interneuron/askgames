@@ -1,6 +1,7 @@
 version: '3'
 services:
   mysql:
+    restart: always
     image: "mysql"
     networks:
       - main
@@ -13,8 +14,19 @@ services:
      - MYSQL_PASSWORD=1234
     volumes:
       - lph-mysql:/var/lib/mysql
+  redis:
+    restart: always
+    image: "redis"
+    networks:
+      - main
+    ports:
+      - "6379:6379"
+    volumes:
+      - lph-redis:/data
 networks:
   main:
 volumes:
   lph-mysql:
     external: true
+  lph-redis:
+      external: true

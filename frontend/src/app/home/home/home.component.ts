@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { KitLoadingBarService } from '@ngx-kit/core';
 import { Apollo } from 'apollo-angular';
 import { getLatestTopicsQuery } from '../../graphql-meta';
@@ -8,6 +8,7 @@ import { getLatestTopics } from '../../topic/topic.graphql';
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomeComponent implements OnInit {
   data: getLatestTopicsQuery;

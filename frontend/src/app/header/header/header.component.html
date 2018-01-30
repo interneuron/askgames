@@ -1,32 +1,10 @@
 <div class="main-container">
   <a class="brand" routerLink="/">AskGames</a>
   <div class="mid"></div>
-  <div class="auth">
-    <button uiButton color="primary" (click)="displaySignIn = true">Sign In</button>
+  <div *ngIf="isAuth | async" class="auth -auth">
+    I AM THE USER!
+  </div>
+  <div *ngIf="!(isAuth | async)" class="auth -guest">
+    <button uiButton color="primary" (click)="showAuthModal()">Sign In</button>
   </div>
 </div>
-
-<ui-modal *kitOverlay="displaySignIn"
-          (close)="closeSignIn()">
-  <div class="auth-modal">
-    <h2>Login to Join The Community</h2>
-    <div class="form">
-      <div class="field">
-        <label>
-          Email
-          <input type="text" uiText>
-        </label>
-      </div>
-      <div class="field">
-        <label>
-          Password
-          <input type="password" uiText>
-        </label>
-      </div>
-      <button uiButton>Log in</button>
-    </div>
-    <div class="social">
-      <button uiButton>Auth with Google</button>
-    </div>
-  </div>
-</ui-modal>

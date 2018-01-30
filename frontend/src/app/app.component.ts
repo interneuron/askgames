@@ -1,26 +1,10 @@
-import { Component } from '@angular/core';
-import { Apollo } from 'apollo-angular';
-import gql from 'graphql-tag';
-
-const latestTopicsQuery = gql`
-  {
-    latestTopics {
-      id
-      title
-      text
-      game {
-        id
-        name
-      }
-    }
-  }
-
-`;
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent {
 }

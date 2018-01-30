@@ -4,11 +4,12 @@ import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { KitModule, KitPlatformBrowserModule, KitRootModule } from '@ngx-kit/core';
-import { Apollo, ApolloModule } from 'apollo-angular';
-import { HttpLink, HttpLinkModule } from 'apollo-angular-link-http';
-import { InMemoryCache } from 'apollo-cache-inmemory';
+import { ApolloModule } from 'apollo-angular';
+import { HttpLinkModule } from 'apollo-angular-link-http';
+import { ApiModule } from './api/api.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { AuthModule } from './auth/auth.module';
 import { HeaderModule } from './header/header.module';
 import { TopicForRootModule } from './topic/topic-for-root.module';
 import { UiLoadingBarModule } from './ui/ui-loading-bar/ui-loading-bar.module';
@@ -31,18 +32,11 @@ import { UiLoadingBarModule } from './ui/ui-loading-bar/ui-loading-bar.module';
     HeaderModule,
     TopicForRootModule,
     UiLoadingBarModule,
+    AuthModule.forRoot(),
+    ApiModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
 })
 export class AppModule {
-  constructor(
-    apollo: Apollo,
-    httpLink: HttpLink,
-  ) {
-    apollo.create({
-      link: httpLink.create({uri: '/graphql'}),
-      cache: new InMemoryCache(),
-    });
-  }
 }

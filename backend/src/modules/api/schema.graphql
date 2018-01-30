@@ -33,8 +33,25 @@ type Account {
     name: String
 }
 
+type AuthAccount {
+    id: Int!
+    name: String
+    email: String
+}
+
+type Session {
+    accountId: Int
+    token: String
+    error: String
+}
+
 type Query {
     topic(id: Int!): Topic
     latestTopics(gameId: Int): [Topic]
     game(id: Int!): Game
+    authAccount: AuthAccount
+}
+
+type Mutation {
+    createSession(email: String!, password: String!): Session
 }

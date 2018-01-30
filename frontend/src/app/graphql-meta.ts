@@ -1,6 +1,27 @@
 /* tslint:disable */
 //  This file was automatically generated and should not be edited.
 
+export interface createSessionMutationVariables {
+  email: string,
+  password: string,
+};
+
+export interface createSessionMutation {
+  createSession:  {
+    accountId: number | null,
+    token: string | null,
+    error: string | null,
+  } | null,
+};
+
+export interface getAuthAccountQuery {
+  authAccount:  {
+    id: number,
+    name: string | null,
+    email: string | null,
+  } | null,
+};
+
 export interface getGameQueryVariables {
   id: number,
 };
@@ -22,6 +43,10 @@ export interface getGameLatestTopicsQuery {
     title: string | null,
     text: string | null,
     author:  {
+      id: number,
+      name: string | null,
+    } | null,
+    game:  {
       id: number,
       name: string | null,
     } | null,

@@ -3,11 +3,13 @@ import { GraphQLFactory, GraphQLModule } from '@nestjs/graphql';
 import { graphiqlExpress, graphqlExpress } from 'apollo-server-express';
 import { ApiModule } from './api/api.module';
 import { AppController } from './app.controller';
+import { StateModule } from './state/state.module';
 
 @Module({
   imports: [
     GraphQLModule,
     ApiModule,
+    StateModule,
   ],
   controllers: [
     AppController,
@@ -20,7 +22,6 @@ export class ApplicationModule implements NestModule {
 
   configure(consumer: MiddlewaresConsumer) {
     const typeDefs = this.graphQLFactory.mergeTypesByPaths('./**/*.graphql');
-    console.log('typeDefs', typeDefs);
     const schema = this.graphQLFactory.createSchema({typeDefs});
     consumer
         .apply(graphiqlExpress({endpointURL: '/graphql'}))

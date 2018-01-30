@@ -1,0 +1,27 @@
+<ui-modal2>
+  <div class="auth-modal">
+    <h2>Login to Join The Community</h2>
+    <div class="form">
+      <div class="field">
+        <label>
+          Email
+          <input type="text"
+                 uiText
+                 [(ngModel)]="form.email">
+        </label>
+      </div>
+      <div class="field">
+        <label>
+          Password
+          <input type="password"
+                 uiText
+                 [(ngModel)]="form.password">
+        </label>
+      </div>
+      <button uiButton (click)="submit()">Log in</button>
+    </div>
+    <div class="social">
+      <button uiButton>Auth with Google</button>
+    </div>
+  </div>
+</ui-modal2>

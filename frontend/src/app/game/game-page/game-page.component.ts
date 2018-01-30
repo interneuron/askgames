@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { KitLoadingBarService } from '@ngx-kit/core';
 import { Apollo } from 'apollo-angular';
@@ -12,6 +12,7 @@ import { getGame, getGameLatestTopics } from '../game.graphql';
   selector: 'app-game-page',
   templateUrl: './game-page.component.html',
   styleUrls: ['./game-page.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GamePageComponent implements OnInit {
   gameData = new BehaviorSubject<getGameQuery>(null);

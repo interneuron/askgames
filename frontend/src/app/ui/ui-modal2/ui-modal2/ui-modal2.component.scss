@@ -1,0 +1,32 @@
+@import "params";
+
+:host {
+  background: $colorBg;
+  box-shadow: $deepShadow;
+  left: 50%;
+  min-width: 400px;
+  padding: 16px;
+  position: fixed;
+  top: 25%;
+  transform: translateX(-50%);
+}
+
+.header {
+  align-items: center;
+  background: #bfbfbf;
+  display: flex;
+  flex-direction: row;
+  padding: 16px;
+  .title {
+    flex-grow: 1;
+  }
+  .close {
+    background: transparent;
+    border: none;
+    color: #ffffff;
+  }
+}
+
+.body {
+  padding: 16px;
+}

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { KitLoadingBarService } from '@ngx-kit/core';
 import { Apollo } from 'apollo-angular';
@@ -11,6 +11,7 @@ import { getTopic } from '../topic.graphql';
   selector: 'app-topic-page',
   templateUrl: './topic-page.component.html',
   styleUrls: ['./topic-page.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TopicPageComponent implements OnInit {
   data = new BehaviorSubject<getTopicQuery>(null);
