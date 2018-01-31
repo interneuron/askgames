@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { KitModalService } from '@ngx-kit/core';
 import { Observable } from 'rxjs/Observable';
 import { AuthModalComponent } from '../../auth/auth-modal/auth-modal.component';
@@ -11,7 +11,9 @@ import { AuthService } from '../../auth/auth.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderComponent implements OnInit {
-  isAuth: Observable<boolean>;
+  authAccountChanges: Observable<boolean>;
+
+  displayMenu = false;
 
   constructor(
     private modalService: KitModalService,
@@ -20,7 +22,7 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.isAuth = this.authService.isAuthChanges;
+    this.authAccountChanges = this.authService.authAccountChanges;
   }
 
   showAuthModal() {

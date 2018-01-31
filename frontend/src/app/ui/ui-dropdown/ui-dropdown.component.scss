@@ -1,0 +1,7 @@
+@import "params";
+
+:host {
+  border: 1px solid $colorLightBorder;
+  box-shadow: $deepShadow;
+  border-radius: 2px;
+}

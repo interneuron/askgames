@@ -12,6 +12,8 @@ import { createSession, getAuthAccount } from './auth.graphql';
 export class AuthService {
   private _isAuth = new BehaviorSubject<boolean>(false);
 
+  private _authAccount = new BehaviorSubject<any>(null);
+
   private token: string;
 
   constructor(
@@ -34,6 +36,10 @@ export class AuthService {
 
   get isAuthChanges(): Observable<boolean> {
     return this._isAuth.asObservable();
+  }
+
+  get authAccountChanges(): Observable<any> {
+    return this._authAccount.asObservable();
   }
 
   createSession(variables: createSessionMutationVariables): Observable<{success: boolean; error?: string}> {
@@ -72,6 +78,7 @@ export class AuthService {
       .subscribe(res => {
         if (res.data.authAccount) {
           this._isAuth.next(true);
+          this._authAccount.next(res.data.authAccount);
         }
       });
   }

@@ -1,10 +1,21 @@
 <div class="main-container">
   <a class="brand" routerLink="/">AskGames</a>
   <div class="mid"></div>
-  <div *ngIf="isAuth | async" class="auth -auth">
-    I AM THE USER!
+  <div *ngIf="authAccountChanges | async; let authAccount" class="auth -auth">
+    Hello, {{ authAccount.name }}!
+    <button kitAnchor #menuAnchor="anchor" (click)="displayMenu = true">Menu</button>
+    <ui-dropdown *kitOverlay="displayMenu"
+                 [anchor]="menuAnchor"
+                 position="bottom-left"
+                 (kitOutsideClick)="displayMenu = false">
+      <ul>
+        <li><a [routerLink]="['@' + authAccount.name]">Profile</a></li>
+        <li><a>Settings</a></li>
+        <li><a>Logout</a></li>
+      </ul>
+    </ui-dropdown>
   </div>
-  <div *ngIf="!(isAuth | async)" class="auth -guest">
+  <div *ngIf="!(authAccountChanges | async)" class="auth -guest">
     <button uiButton color="primary" (click)="showAuthModal()">Sign In</button>
   </div>
 </div>
