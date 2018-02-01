@@ -31,6 +31,15 @@ type TopicComment {
 type Account {
     id: Int!
     name: String
+    picture: String
+    background: String
+    about: String
+    socialVk: String
+    socialFb: String
+    socialYt: String
+    socialTw: String
+    website: String
+    topics: [Topic]
 }
 
 type AuthAccount {
@@ -49,6 +58,8 @@ type Query {
     topic(id: Int!): Topic
     latestTopics(gameId: Int): [Topic]
     game(id: Int!): Game
+    account(id: Int!): Account
+    accountByName(name: String!): Account
     authAccount: AuthAccount
 }
 

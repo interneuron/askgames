@@ -23,6 +23,10 @@ export class AccountService {
     return await this.accountRepo.findOne({id});
   }
 
+  async findByName(name: string): Promise<Account> {
+    return await this.accountRepo.findOne({name});
+  }
+
   async createSession(email: string, password: string): Promise<CreateSessionResponse> {
     const account = await this.accountRepo.findOne({email});
     this.state.client.keys('*', function (err, res) {

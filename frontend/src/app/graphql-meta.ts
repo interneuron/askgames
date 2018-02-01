@@ -1,6 +1,34 @@
 /* tslint:disable */
 //  This file was automatically generated and should not be edited.
 
+export interface getAccountByNameQueryVariables {
+  name: string,
+};
+
+export interface getAccountByNameQuery {
+  accountByName:  {
+    id: number,
+    name: string | null,
+    picture: string | null,
+    background: string | null,
+    about: string | null,
+    socialVk: string | null,
+    socialFb: string | null,
+    socialYt: string | null,
+    socialTw: string | null,
+    website: string | null,
+    topics:  Array< {
+      id: number,
+      title: string | null,
+      text: string | null,
+      game:  {
+        id: number,
+        name: string | null,
+      } | null,
+    } | null > | null,
+  } | null,
+};
+
 export interface createSessionMutationVariables {
   email: string,
   password: string,
