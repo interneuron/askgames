@@ -19,3 +19,12 @@ export const getAccountByName = gql`
     }
   }
 `;
+
+export const updateSettings = gql`
+  mutation updateSettings($form: SettingsForm){
+    updateSettings(form: $form) {
+      success
+      error
+    }
+  }
+`;

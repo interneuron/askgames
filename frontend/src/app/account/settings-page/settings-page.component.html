@@ -1,0 +1,21 @@
+<div class="main-container">
+  <ui-breadcrumbs>
+    <a *kitRef uiBreadcrumbsItem>Profile name</a>
+    <span *kitRef uiBreadcrumbsItem>Settings</span>
+  </ui-breadcrumbs>
+  <div *ngIf="loaded">
+    <form #ngForm="ngForm">
+      <ui-form-field label="About">
+        <textarea uiText
+                  name="about"
+                  [(ngModel)]="form.about"></textarea>
+      </ui-form-field>
+      <ui-form-field label="Picture">
+        <img *ngIf="form.pictureData" [src]="form.pictureData">
+        <img *ngIf="!form.pictureData && accountPicture" [src]="accountPicture | pictureUrl">
+        <input type="file" id="picture" (change)="pickPicture($event)">
+      </ui-form-field>
+      <button uiButton (click)="submit()">Submit</button>
+    </form>
+  </div>
+</div>

@@ -14,7 +14,6 @@ import { StateModule } from './state/state.module';
   controllers: [
     AppController,
   ],
-  components: [],
 })
 export class ApplicationModule implements NestModule {
   constructor(private readonly graphQLFactory: GraphQLFactory) {

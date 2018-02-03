@@ -1,6 +1,11 @@
 /* tslint:disable */
 //  This file was automatically generated and should not be edited.
 
+export interface SettingsForm {
+  about?: string | null,
+  pictureData?: string | null,
+};
+
 export interface getAccountByNameQueryVariables {
   name: string,
 };
@@ -10,13 +15,7 @@ export interface getAccountByNameQuery {
     id: number,
     name: string | null,
     picture: string | null,
-    background: string | null,
     about: string | null,
-    socialVk: string | null,
-    socialFb: string | null,
-    socialYt: string | null,
-    socialTw: string | null,
-    website: string | null,
     topics:  Array< {
       id: number,
       title: string | null,
@@ -26,6 +25,17 @@ export interface getAccountByNameQuery {
         name: string | null,
       } | null,
     } | null > | null,
+  } | null,
+};
+
+export interface updateSettingsMutationVariables {
+  form?: SettingsForm | null,
+};
+
+export interface updateSettingsMutation {
+  updateSettings:  {
+    success: boolean | null,
+    error: string | null,
   } | null,
 };
 

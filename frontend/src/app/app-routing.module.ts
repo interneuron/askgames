@@ -14,6 +14,10 @@ const routes: Routes = [
     path: 'game',
     loadChildren: './game/game.module#GameModule',
   },
+  {
+    path: 'account',
+    loadChildren: './account/account.module#AccountModule',
+  },
 ];
 
 @NgModule({

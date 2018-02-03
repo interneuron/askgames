@@ -2,6 +2,7 @@ import { Component, Inject } from '@nestjs/common';
 import { compareSync } from 'bcryptjs';
 import { Repository } from 'typeorm';
 import { uuid } from '../../util/uuid';
+import { SavePictureService } from '../helpers/save-picture.service';
 import { StateService } from '../state/state.service';
 import { Account } from './account.entity';
 import { accountRepoToken, CreateSessionResponse } from './meta';
@@ -11,6 +12,7 @@ export class AccountService {
   constructor(
       @Inject(accountRepoToken) private readonly accountRepo: Repository<Account>,
       private state: StateService,
+      private savePicture: SavePictureService,
   ) {
 
   }
@@ -64,5 +66,17 @@ export class AccountService {
         }
       });
     });
+  }
+
+  async updateSettings(id: number, form: {about: string, pictureData: string}): Promise<Account> {
+    const account = await this.accountRepo.findOne({id});
+    if (account) {
+      account.about = form.about;
+      if (form.pictureData) {
+        // @todo clear picture
+        account.picture = this.savePicture.save('pictures/profile', account.id, form.pictureData);
+      }
+      return this.accountRepo.save(account);
+    }
   }
 }

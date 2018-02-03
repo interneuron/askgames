@@ -10,7 +10,7 @@
                  (kitOutsideClick)="displayMenu = false">
       <ul>
         <li><a [routerLink]="['@' + authAccount.name]">Profile</a></li>
-        <li><a>Settings</a></li>
+        <li><a routerLink="/account/settings">Settings</a></li>
         <li><a>Logout</a></li>
       </ul>
     </ui-dropdown>

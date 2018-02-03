@@ -23,6 +23,14 @@ services:
       - "6379:6379"
     volumes:
       - lph-redis:/data
+  store-node:
+    image: dhub.nvx.me:443/ag-store-node
+    networks:
+      - main
+    ports:
+      - "4080:80"
+    volumes:
+      - ./store:/var/store
 networks:
   main:
 volumes:

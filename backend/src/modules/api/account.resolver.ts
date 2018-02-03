@@ -12,7 +12,7 @@ export class AccountResolver {
   }
 
   @Mutation()
-  async createSession(_, {email, password}) {
+  async createSession(obj, {email, password}) {
     return await this.accountService.createSession(email, password);
   }
 
@@ -39,5 +39,15 @@ export class AccountResolver {
   @ResolveProperty()
   topics(account: Account) {
     return this.topicService.findLatest(20, {accountId: account.id});
+  }
+
+  @Mutation()
+  async updateSettings(obj, {form}) {
+    const accountId = await this.accountService.isAuth(obj.headers['auth-token']);
+    if (accountId) {
+      return this.accountService.updateSettings(accountId, form);
+    } else {
+      return {};
+    }
   }
 }

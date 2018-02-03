@@ -13,6 +13,7 @@ import { AuthModule } from './auth/auth.module';
 import { HeaderModule } from './header/header.module';
 import { TopicForRootModule } from './topic/topic-for-root.module';
 import { UiLoadingBarModule } from './ui/ui-loading-bar/ui-loading-bar.module';
+import { UiNotificationModule } from './ui/ui-notification/ui-notification.module';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { UiLoadingBarModule } from './ui/ui-loading-bar/ui-loading-bar.module';
     UiLoadingBarModule,
     AuthModule.forRoot(),
     ApiModule,
+    UiNotificationModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -7,10 +7,11 @@ import { map } from 'rxjs/operators';
 import { ApiService } from '../api/api.service';
 import { createSessionMutation, createSessionMutationVariables, getAuthAccountQuery, } from '../graphql-meta';
 import { createSession, getAuthAccount } from './auth.graphql';
+import { IsAuthState } from './meta';
 
 @Injectable()
 export class AuthService {
-  private _isAuth = new BehaviorSubject<boolean>(false);
+  private _isAuth = new BehaviorSubject<IsAuthState>(null);
 
   private _authAccount = new BehaviorSubject<any>(null);
 
@@ -26,20 +27,26 @@ export class AuthService {
       if (this.token) {
         this.api.token = this.token;
         this.loadAuthAccount();
+      } else {
+        this._isAuth.next(false);
       }
     }
   }
 
-  get isAuth(): boolean {
+  get isAuth(): IsAuthState {
     return this._isAuth.value;
   }
 
-  get isAuthChanges(): Observable<boolean> {
+  get isAuthChanges(): Observable<IsAuthState> {
     return this._isAuth.asObservable();
   }
 
   get authAccountChanges(): Observable<any> {
     return this._authAccount.asObservable();
+  }
+
+  get authAccount(): any {
+    return this._authAccount.value;
   }
 
   createSession(variables: createSessionMutationVariables): Observable<{success: boolean; error?: string}> {
@@ -79,6 +86,8 @@ export class AuthService {
         if (res.data.authAccount) {
           this._isAuth.next(true);
           this._authAccount.next(res.data.authAccount);
+        } else {
+          this._isAuth.next(false);
         }
       });
   }
