@@ -16,6 +16,15 @@ export class AccountResolver {
     return await this.accountService.createSession(email, password);
   }
 
+  @Mutation()
+  async destroySession(obj) {
+    const token = obj.headers['auth-token'];
+    const accountId = await this.accountService.isAuth(token);
+    if (accountId) {
+      return this.accountService.removeToken(token);
+    }
+  }
+
   @Query()
   async authAccount(obj, args, context, info) {
     const accountId = await this.accountService.isAuth(obj.headers['auth-token']);

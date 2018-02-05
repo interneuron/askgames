@@ -39,6 +39,10 @@ export interface updateSettingsMutation {
   } | null,
 };
 
+export interface DestroySessionMutation {
+  destroySession: boolean | null,
+};
+
 export interface createSessionMutationVariables {
   email: string,
   password: string,

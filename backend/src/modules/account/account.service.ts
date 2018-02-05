@@ -68,6 +68,14 @@ export class AccountService {
     });
   }
 
+  async removeToken(token: string): Promise<boolean> {
+    return new Promise<boolean>(resolve => {
+      this.state.client.del(token, function (err, res) {
+        resolve(!!res);
+      });
+    });
+  }
+
   async updateSettings(id: number, form: {about: string, pictureData: string}): Promise<Account> {
     const account = await this.accountRepo.findOne({id});
     if (account) {

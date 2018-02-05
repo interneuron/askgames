@@ -28,4 +28,9 @@ export class HeaderComponent implements OnInit {
   showAuthModal() {
     this.modalService.show(AuthModalComponent);
   }
+
+  logout() {
+    this.authService.destroySession().subscribe(() => {
+    });
+  }
 }

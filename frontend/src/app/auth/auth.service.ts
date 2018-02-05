@@ -3,10 +3,13 @@ import { KitPlatformService } from '@ngx-kit/core';
 import { Apollo } from 'apollo-angular';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
-import { map } from 'rxjs/operators';
+import { map, mapTo } from 'rxjs/operators';
 import { ApiService } from '../api/api.service';
-import { createSessionMutation, createSessionMutationVariables, getAuthAccountQuery, } from '../graphql-meta';
-import { createSession, getAuthAccount } from './auth.graphql';
+import {
+  createSessionMutation, createSessionMutationVariables, DestroySessionMutation,
+  getAuthAccountQuery,
+} from '../graphql-meta';
+import { authQueries, createSession, getAuthAccount } from './auth.graphql';
 import { IsAuthState } from './meta';
 
 @Injectable()
@@ -74,6 +77,26 @@ export class AuthService {
             return {success: false, error: 'invalid_response'};
           }
         }),
+      );
+  }
+
+  destroySession(): Observable<boolean> {
+    return this.apollo
+      .mutate<DestroySessionMutation>({
+        mutation: authQueries.destroySession,
+      })
+      .pipe(
+        map(res => res.data),
+        map((res: DestroySessionMutation) => {
+          this.token = null;
+          this.api.token = this.token;
+          this._isAuth.next(false);
+          this._authAccount.next(null);
+          if (this.platform.isBrowser()) {
+            localStorage.setItem('auth-token', this.token);
+          }
+        }),
+        mapTo(true),
       );
   }
 
