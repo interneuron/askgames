@@ -28,4 +28,14 @@ export class AuthModalComponent implements OnInit {
       }
     });
   }
+
+  googleAuth() {
+    this.authService.createGoogleSession().subscribe(res => {
+      if (res.success) {
+        alert('LOGIN IS SUCCESS');
+      } else {
+        alert(res.error);
+      }
+    });
+  }
 }

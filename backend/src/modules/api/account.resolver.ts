@@ -11,20 +11,6 @@ export class AccountResolver {
   ) {
   }
 
-  @Mutation()
-  async createSession(obj, {email, password}) {
-    return await this.accountService.createSession(email, password);
-  }
-
-  @Mutation()
-  async destroySession(obj) {
-    const token = obj.headers['auth-token'];
-    const accountId = await this.accountService.isAuth(token);
-    if (accountId) {
-      return this.accountService.removeToken(token);
-    }
-  }
-
   @Query()
   async authAccount(obj, args, context, info) {
     const accountId = await this.accountService.isAuth(obj.headers['auth-token']);
@@ -48,6 +34,25 @@ export class AccountResolver {
   @ResolveProperty()
   topics(account: Account) {
     return this.topicService.findLatest(20, {accountId: account.id});
+  }
+
+  @Mutation()
+  async createSession(obj, {email, password}) {
+    return await this.accountService.createSession(email, password);
+  }
+
+  @Mutation()
+  async createGoogleSession(obj, {id, access_token}) {
+    return await this.accountService.createGoogleSession(id, access_token);
+  }
+
+  @Mutation()
+  async destroySession(obj) {
+    const token = obj.headers['auth-token'];
+    const accountId = await this.accountService.isAuth(token);
+    if (accountId) {
+      return this.accountService.removeToken(token);
+    }
   }
 
   @Mutation()

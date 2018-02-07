@@ -43,6 +43,19 @@ export interface DestroySessionMutation {
   destroySession: boolean | null,
 };
 
+export interface createGoogleSessionMutationVariables {
+  id: string,
+  access_token: string,
+};
+
+export interface createGoogleSessionMutation {
+  createGoogleSession:  {
+    accountId: number | null,
+    token: string | null,
+    error: string | null,
+  } | null,
+};
+
 export interface createSessionMutationVariables {
   email: string,
   password: string,

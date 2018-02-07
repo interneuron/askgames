@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { KitModalService } from '@ngx-kit/core';
 import { Observable } from 'rxjs/Observable';
 import { AuthModalComponent } from '../../auth/auth-modal/auth-modal.component';
@@ -18,11 +18,15 @@ export class HeaderComponent implements OnInit {
   constructor(
     private modalService: KitModalService,
     private authService: AuthService,
+    private cdr: ChangeDetectorRef,
   ) {
   }
 
   ngOnInit() {
     this.authAccountChanges = this.authService.authAccountChanges;
+    this.authAccountChanges.subscribe(() => {
+      this.cdr.markForCheck();
+    });
   }
 
   showAuthModal() {

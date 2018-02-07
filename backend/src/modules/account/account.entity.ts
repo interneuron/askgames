@@ -14,6 +14,12 @@ export class Account {
   password: string;
 
   @Column({length: 50})
+  googleId: string;
+
+  @Column({length: 50})
+  vkId: string;
+
+  @Column({length: 50})
   name: string;
 
   @Column({length: 50})

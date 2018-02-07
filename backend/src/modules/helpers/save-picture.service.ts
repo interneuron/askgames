@@ -1,17 +1,17 @@
 import { Component } from '@nestjs/common';
 import { existsSync, mkdirSync, writeFileSync } from 'fs';
 import { resolve } from 'path';
-import { EnvService } from '../env.service';
+import { config } from '../../config';
 
 @Component()
 export class SavePictureService {
-  constructor(private env: EnvService) {
+  constructor() {
   }
 
   save(dir, prefix, data): string {
     const crypto = require('crypto');
     const base64Data = data.replace(/^data:image\/png;base64,/, '');
-    const dirPath = resolve(this.env.storePath, dir);
+    const dirPath = resolve(config.storePath, dir);
     if (!existsSync(dirPath)) {
       mkdirSync(dirPath);
     }

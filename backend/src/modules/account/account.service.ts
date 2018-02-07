@@ -1,6 +1,8 @@
 import { Component, Inject } from '@nestjs/common';
 import { compareSync } from 'bcryptjs';
+import * as request from 'request';
 import { Repository } from 'typeorm';
+import { config } from '../../config';
 import { uuid } from '../../util/uuid';
 import { SavePictureService } from '../helpers/save-picture.service';
 import { StateService } from '../state/state.service';
@@ -36,13 +38,9 @@ export class AccountService {
     if (account) {
       // const hash = hashSync(password); <-- need for registration
       if (compareSync(password, account.password)) {
-        const token = uuid();
-        // @todo add EXPIRE
-        this.state.client.set(token, account.id.toString(), function (err, res) {
-        });
         return {
           accountId: account.id,
-          token,
+          token: this.genSession(account.id),
         };
       } else {
         return {
@@ -54,6 +52,48 @@ export class AccountService {
         error: 'invalid_email_or_password',
       }
     }
+  }
+
+  async createGoogleSession(id: string, access_token: string): Promise<CreateSessionResponse> {
+    return new Promise((resolve) => {
+      const url = `https://www.googleapis.com/oauth2/v1/userinfo?client_id=${config.google.clientId}&access_token=${access_token}`;
+      request(url, async (error, response, body) => {
+        if (!error && response.statusCode == 200) {
+          const authData: {id: string, email: string} = JSON.parse(body);
+          console.log(authData);
+          if (id === authData.id) {
+            const account = await this.accountRepo.findOne({googleId: authData.id});
+            if (account) {
+              resolve({
+                accountId: account.id,
+                token: this.genSession(account.id),
+              });
+            }
+            else {
+              const account = new Account();
+              account.googleId = authData.id;
+              account.email = authData.email;
+              // @todo handle nickname
+              account.name = 'test-kek-1';
+              await this.accountRepo.save(account);
+              resolve({
+                accountId: account.id,
+                token: this.genSession(account.id),
+              });
+            }
+          } else {
+            resolve({
+              error: 'invalid_google_auth',
+            });
+          }
+        }
+        else {
+          resolve({
+            error: 'invalid_google_auth',
+          });
+        }
+      });
+    });
   }
 
   async isAuth(token: string): Promise<number | null> {
@@ -86,5 +126,13 @@ export class AccountService {
       }
       return this.accountRepo.save(account);
     }
+  }
+
+  private genSession(accountId: number): string {
+    const token = uuid();
+    // @todo add EXPIRE
+    this.state.client.set(token, accountId.toString(), function (err, res) {
+    });
+    return token;
   }
 }

@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { UiModal2Module } from '../ui/ui-modal2';
 import { AuthModalComponent } from './auth-modal/auth-modal.component';
 import { AuthService } from './auth.service';
+import { GoogleAuthService } from './google-auth.service';
 
 @NgModule({
   imports: [
@@ -15,7 +16,9 @@ import { AuthService } from './auth.service';
     AuthModalComponent,
   ],
   exports: [],
-  providers: [],
+  providers: [
+    GoogleAuthService,
+  ],
   entryComponents: [
     AuthModalComponent,
   ],

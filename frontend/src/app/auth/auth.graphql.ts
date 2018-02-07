@@ -1,10 +1,19 @@
 import gql from 'graphql-tag';
 
-export const authQueries = {
+export const authGql = {
   destroySession: gql`
     mutation DestroySession {
       destroySession
     }`,
+  createGoogleSession: gql`
+    mutation createGoogleSession($id: String!, $access_token: String!){
+      createGoogleSession(id: $id, access_token: $access_token) {
+        accountId
+        token
+        error
+      }
+    }
+  `,
 };
 
 export const createSession = gql`

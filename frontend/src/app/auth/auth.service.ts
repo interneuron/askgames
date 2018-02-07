@@ -3,13 +3,15 @@ import { KitPlatformService } from '@ngx-kit/core';
 import { Apollo } from 'apollo-angular';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
-import { map, mapTo } from 'rxjs/operators';
+import { map, mapTo, switchMap } from 'rxjs/operators';
 import { ApiService } from '../api/api.service';
 import {
+  createGoogleSessionMutation, createGoogleSessionMutationVariables,
   createSessionMutation, createSessionMutationVariables, DestroySessionMutation,
   getAuthAccountQuery,
 } from '../graphql-meta';
-import { authQueries, createSession, getAuthAccount } from './auth.graphql';
+import { authGql, createSession, getAuthAccount } from './auth.graphql';
+import { GoogleAuthService } from './google-auth.service';
 import { IsAuthState } from './meta';
 
 @Injectable()
@@ -24,6 +26,7 @@ export class AuthService {
     private apollo: Apollo,
     private api: ApiService,
     private platform: KitPlatformService,
+    private google: GoogleAuthService,
   ) {
     if (platform.isBrowser()) {
       this.token = localStorage.getItem('auth-token');
@@ -61,21 +64,7 @@ export class AuthService {
       .pipe(
         map(res => res.data),
         map((res: createSessionMutation) => {
-          if (res.createSession) {
-            if (res.createSession.token) {
-              this.token = res.createSession.token;
-              this.api.token = this.token;
-              if (this.platform.isBrowser()) {
-                localStorage.setItem('auth-token', this.token);
-              }
-              this.loadAuthAccount();
-              return {success: true};
-            } else {
-              return {success: false, error: res.createSession.error};
-            }
-          } else {
-            return {success: false, error: 'invalid_response'};
-          }
+          return this.sessionHandler('createSession', res);
         }),
       );
   }
@@ -83,7 +72,7 @@ export class AuthService {
   destroySession(): Observable<boolean> {
     return this.apollo
       .mutate<DestroySessionMutation>({
-        mutation: authQueries.destroySession,
+        mutation: authGql.destroySession,
       })
       .pipe(
         map(res => res.data),
@@ -100,6 +89,22 @@ export class AuthService {
       );
   }
 
+  createGoogleSession(): Observable<{success: boolean; error?: string}> {
+    return this.google.signIn().pipe(
+      switchMap(data => {
+        return this.apollo
+          .mutate<createGoogleSessionMutation, createGoogleSessionMutationVariables>({
+            mutation: authGql.createGoogleSession,
+            variables: data,
+          });
+      }),
+      map(res => res.data),
+      map((res: createGoogleSessionMutation) => {
+        return this.sessionHandler('createGoogleSession', res);
+      }),
+    );
+  }
+
   private loadAuthAccount() {
     this.apollo
       .query<getAuthAccountQuery>({
@@ -113,5 +118,24 @@ export class AuthService {
           this._isAuth.next(false);
         }
       });
+  }
+
+  private sessionHandler<T>(key: string, data: T) {
+    const session = data[key];
+    if (session) {
+      if (session.token) {
+        this.token = session.token;
+        this.api.token = this.token;
+        if (this.platform.isBrowser()) {
+          localStorage.setItem('auth-token', this.token);
+        }
+        this.loadAuthAccount();
+        return {success: true};
+      } else {
+        return {success: false, error: session.error};
+      }
+    } else {
+      return {success: false, error: 'invalid_response'};
+    }
   }
 }
