@@ -2,29 +2,21 @@
 //  This file was automatically generated and should not be edited.
 
 export interface SettingsForm {
+  displayName: string,
   about?: string | null,
   pictureData?: string | null,
 };
 
-export interface getAccountByNameQueryVariables {
-  name: string,
+export interface getSettingsAccountQueryVariables {
+  id: number,
 };
 
-export interface getAccountByNameQuery {
-  accountByName:  {
+export interface getSettingsAccountQuery {
+  account:  {
     id: number,
-    name: string | null,
+    displayName: string | null,
     picture: string | null,
     about: string | null,
-    topics:  Array< {
-      id: number,
-      title: string | null,
-      text: string | null,
-      game:  {
-        id: number,
-        name: string | null,
-      } | null,
-    } | null > | null,
   } | null,
 };
 
@@ -36,6 +28,28 @@ export interface updateSettingsMutation {
   updateSettings:  {
     success: boolean | null,
     error: string | null,
+  } | null,
+};
+
+export interface getUserPageQueryVariables {
+  id: number,
+};
+
+export interface getUserPageQuery {
+  account:  {
+    id: number,
+    displayName: string | null,
+    picture: string | null,
+    about: string | null,
+    topics:  Array< {
+      id: number,
+      title: string | null,
+      text: string | null,
+      game:  {
+        id: number,
+        name: string | null,
+      } | null,
+    } | null > | null,
   } | null,
 };
 
@@ -72,7 +86,7 @@ export interface createSessionMutation {
 export interface getAuthAccountQuery {
   authAccount:  {
     id: number,
-    name: string | null,
+    displayName: string | null,
     email: string | null,
   } | null,
 };
@@ -99,7 +113,7 @@ export interface getGameLatestTopicsQuery {
     text: string | null,
     author:  {
       id: number,
-      name: string | null,
+      displayName: string | null,
     } | null,
     game:  {
       id: number,
@@ -135,14 +149,14 @@ export interface getTopicQuery {
     } | null,
     author:  {
       id: number,
-      name: string | null,
+      displayName: string | null,
     } | null,
     comments:  Array< {
       id: number,
       text: string | null,
       author:  {
         id: number,
-        name: string | null,
+        displayName: string | null,
       } | null,
     } | null > | null,
     answers:  Array< {
@@ -150,14 +164,14 @@ export interface getTopicQuery {
       text: string | null,
       author:  {
         id: number,
-        name: string | null,
+        displayName: string | null,
       } | null,
       comments:  Array< {
         id: number,
         text: string | null,
         author:  {
           id: number,
-          name: string | null,
+          displayName: string | null,
         } | null,
       } | null > | null,
     } | null > | null,

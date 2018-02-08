@@ -1,30 +1,41 @@
 import gql from 'graphql-tag';
 
-export const getAccountByName = gql`
-  query getAccountByName($name: String!) {
-    accountByName(name: $name) {
-      id
-      name
-      picture
-      about
-      topics {
+export const accountGql = {
+  getSettingsAccount: gql`
+    query getSettingsAccount($id: Int!) {
+      account(id: $id) {
         id
-        title
-        text
-        game {
+        displayName
+        picture
+        about
+      }
+    }
+  `,
+  updateSettings: gql`
+    mutation updateSettings($form: SettingsForm){
+      updateSettings(form: $form) {
+        success
+        error
+      }
+    }
+  `,
+  getUserPage: gql`
+    query getUserPage($id: Int!) {
+      account(id: $id) {
+        id
+        displayName
+        picture
+        about
+        topics {
           id
-          name
+          title
+          text
+          game {
+            id
+            name
+          }
         }
       }
     }
-  }
-`;
-
-export const updateSettings = gql`
-  mutation updateSettings($form: SettingsForm){
-    updateSettings(form: $form) {
-      success
-      error
-    }
-  }
-`;
+  `,
+};

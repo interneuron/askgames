@@ -30,7 +30,7 @@ type TopicComment {
 
 type Account {
     id: Int!
-    name: String
+    displayName: String
     picture: String
     background: String
     about: String
@@ -44,7 +44,7 @@ type Account {
 
 type AuthAccount {
     id: Int!
-    name: String
+    displayName: String
     email: String
 }
 
@@ -69,6 +69,7 @@ type FormResult {
 }
 
 input SettingsForm {
+    displayName: String!
     about: String
     pictureData: String
 }

@@ -5,6 +5,11 @@
   </ui-breadcrumbs>
   <div *ngIf="loaded">
     <form #ngForm="ngForm">
+      <ui-form-field label="Name">
+        <input uiText
+               name="displayName"
+               [(ngModel)]="form.displayName">
+      </ui-form-field>
       <ui-form-field label="About">
         <textarea uiText
                   name="about"

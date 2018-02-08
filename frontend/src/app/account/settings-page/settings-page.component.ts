@@ -3,9 +3,12 @@ import { NgForm } from '@angular/forms';
 import { KitLoadingBarService, KitNotificationService } from '@ngx-kit/core';
 import { Apollo } from 'apollo-angular';
 import { AuthService } from '../../auth/auth.service';
-import { getAccountByNameQuery, updateSettingsMutation, updateSettingsMutationVariables } from '../../graphql-meta';
+import {
+  getSettingsAccountQuery, getSettingsAccountQueryVariables, updateSettingsMutation,
+  updateSettingsMutationVariables,
+} from '../../graphql-meta';
 import { resizeImage } from '../../util/resize-image';
-import { getAccountByName, updateSettings } from '../account.graphql';
+import { accountGql } from '../account.graphql';
 
 @Component({
   selector: 'app-settings-page',
@@ -19,9 +22,10 @@ export class SettingsPageComponent implements OnInit {
   loaded = false;
 
   form: {
+    displayName: string;
     about?: string;
     pictureData?: string;
-  } = {};
+  };
 
   accountPicture: string;
 
@@ -38,15 +42,18 @@ export class SettingsPageComponent implements OnInit {
     const lb = 'account';
     this.loadingBar.start(lb);
     this.apollo
-      .query<getAccountByNameQuery>({
-        query: getAccountByName,
+      .query<getSettingsAccountQuery, getSettingsAccountQueryVariables>({
+        query: accountGql.getSettingsAccount,
         variables: {
-          name: this.auth.authAccount.name,
+          id: this.auth.authAccount.id,
         },
       })
       .subscribe(res => {
-        this.form.about = res.data.accountByName.about;
-        this.accountPicture = res.data.accountByName.picture;
+        this.form = {
+          about: res.data.account.about,
+          displayName: res.data.account.displayName,
+        };
+        this.accountPicture = res.data.account.picture;
         this.loadingBar.end(lb);
         this.loaded = true;
         this.cdr.markForCheck();
@@ -57,7 +64,7 @@ export class SettingsPageComponent implements OnInit {
     if (this.ngForm.valid) {
       this.apollo
         .mutate<updateSettingsMutation, updateSettingsMutationVariables>({
-          mutation: updateSettings,
+          mutation: accountGql.updateSettings,
           variables: {
             form: this.form,
           },

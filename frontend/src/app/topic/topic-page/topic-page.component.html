@@ -7,7 +7,7 @@
   <div class="main-container">
     <div class="main">
       <div class="topic">
-        <div class="author">{{ data.topic.author.name }}</div>
+        <div class="author">{{ data.topic.author.displayName }}</div>
         <h1>{{ data.topic.title }}</h1>
         <div>
           {{ data.topic.text }}
@@ -16,18 +16,18 @@
       <div class="comments" *ngIf="data.topic.comments">
         <h4>Comments</h4>
         <div *ngFor="let comment of data.topic.comments" class="comment">
-          {{ comment.author.name }}: {{ comment.text }}
+          {{ comment.author.displayName }}: {{ comment.text }}
         </div>
       </div>
       <div class="answers">
         <h3>Answers</h3>
         <div *ngFor="let answer of data.topic.answers" class="answer">
-          <div class="author">{{ answer.author.name }}</div>
+          <div class="author">{{ answer.author.displayName }}</div>
           {{ answer.text }}
           <div class="comments" *ngIf="answer.comments">
             <h4>Comments</h4>
             <div *ngFor="let comment of answer.comments" class="comment">
-              {{ comment.author.name }}: {{ comment.text }}
+              {{ comment.author.displayName }}: {{ comment.text }}
             </div>
           </div>
         </div>

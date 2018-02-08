@@ -17,7 +17,7 @@ export const getGameLatestTopics = gql`
       text
       author {
         id
-        name
+        displayName
       }
       game {
         id

@@ -4,17 +4,17 @@ import { KitLoadingBarService } from '@ngx-kit/core';
 import { Apollo } from 'apollo-angular';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { distinctUntilChanged, map, pluck, switchMap, tap } from 'rxjs/operators';
-import { getAccountByName } from '../../account/account.graphql';
-import { getAccountByNameQuery } from '../../graphql-meta';
+import { accountGql } from '../../account/account.graphql';
+import { getUserPageQuery, getUserPageQueryVariables } from '../../graphql-meta';
 
 @Component({
   selector: 'app-account-page',
-  templateUrl: './account-page.component.html',
-  styleUrls: ['./account-page.component.scss'],
+  templateUrl: './user-page.component.html',
+  styleUrls: ['./user-page.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AccountPageComponent implements OnInit {
-  data = new BehaviorSubject<getAccountByNameQuery>(null);
+export class UserPageComponent implements OnInit {
+  data = new BehaviorSubject<getUserPageQuery>(null);
 
   constructor(
     private router: ActivatedRoute,
@@ -27,16 +27,15 @@ export class AccountPageComponent implements OnInit {
     const lb = 'account';
     this.router.params
       .pipe(
-        pluck('name'),
+        pluck('id'),
         distinctUntilChanged(),
         tap(() => {
           this.loadingBar.start(lb);
         }),
-        map((name: string) => name.slice(1)),
-        switchMap((name: string) => this.apollo
-          .query<getAccountByNameQuery>({
-            query: getAccountByName,
-            variables: {name},
+        switchMap((id: number) => this.apollo
+          .query<getUserPageQuery, getUserPageQueryVariables>({
+            query: accountGql.getUserPage,
+            variables: {id},
           })),
         map(d => d.data),
         tap(() => {

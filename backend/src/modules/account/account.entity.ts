@@ -23,6 +23,9 @@ export class Account {
   name: string;
 
   @Column({length: 50})
+  displayName: string;
+
+  @Column({length: 50})
   picture: string;
 
   @Column({length: 250})

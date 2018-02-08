@@ -11,6 +11,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthModule } from './auth/auth.module';
 import { HeaderModule } from './header/header.module';
+import { HomeModule } from './home/home.module';
 import { TopicForRootModule } from './topic/topic-for-root.module';
 import { UiLoadingBarModule } from './ui/ui-loading-bar/ui-loading-bar.module';
 import { UiNotificationModule } from './ui/ui-notification/ui-notification.module';
@@ -36,6 +37,7 @@ import { UiNotificationModule } from './ui/ui-notification/ui-notification.modul
     AuthModule.forRoot(),
     ApiModule,
     UiNotificationModule,
+    HomeModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

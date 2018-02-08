@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AccountPageComponent } from './account-page/account-page.component';
+import { UserPageComponent } from './user-page/user-page.component';
 import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
@@ -10,8 +10,8 @@ const routes: Routes = [
     pathMatch: 'full',
   },
   {
-    path: ':name',
-    component: AccountPageComponent,
+    path: 'user/:id',
+    component: UserPageComponent,
   },
 ];
 

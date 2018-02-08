@@ -367,7 +367,7 @@
               "deprecationReason": null
             },
             {
-              "name": "name",
+              "name": "displayName",
               "description": "",
               "args": [],
               "type": {
@@ -648,7 +648,7 @@
               "deprecationReason": null
             },
             {
-              "name": "name",
+              "name": "displayName",
               "description": "",
               "args": [],
               "type": {
@@ -868,6 +868,20 @@
           "description": "",
           "fields": null,
           "inputFields": [
+            {
+              "name": "displayName",
+              "description": "",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null
+            },
             {
               "name": "about",
               "description": "",

@@ -26,14 +26,14 @@ export const getTopic = gql`
       }
       author {
         id
-        name
+        displayName
       }
       comments {
         id
         text
         author {
           id
-          name
+          displayName
         }        
       }
       answers {
@@ -41,14 +41,14 @@ export const getTopic = gql`
         text
         author {
           id
-          name
+          displayName
         }
         comments {
           id
           text
           author {
             id
-            name
+            displayName
           }
         }
       }

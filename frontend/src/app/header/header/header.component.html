@@ -2,14 +2,14 @@
   <a class="brand" routerLink="/">AskGames</a>
   <div class="mid"></div>
   <div *ngIf="authAccountChanges | async; let authAccount" class="auth -auth">
-    Hello, {{ authAccount.name }}!
+    Hello, {{ authAccount.displayName }}!
     <button kitAnchor #menuAnchor="anchor" (click)="displayMenu = true">Menu</button>
     <ui-dropdown *kitOverlay="displayMenu"
                  [anchor]="menuAnchor"
                  position="bottom-left"
                  (kitOutsideClick)="displayMenu = false">
       <ul>
-        <li><a [routerLink]="['@' + authAccount.name]">Profile</a></li>
+        <li><a [routerLink]="['/user', authAccount.id]">Profile</a></li>
         <li><a routerLink="/account/settings">Settings</a></li>
         <li><button (click)="logout()">Logout</button></li>
       </ul>

@@ -59,7 +59,7 @@ export class AccountService {
       const url = `https://www.googleapis.com/oauth2/v1/userinfo?client_id=${config.google.clientId}&access_token=${access_token}`;
       request(url, async (error, response, body) => {
         if (!error && response.statusCode == 200) {
-          const authData: {id: string, email: string} = JSON.parse(body);
+          const authData: {id: string, email: string, name: string} = JSON.parse(body);
           console.log(authData);
           if (id === authData.id) {
             const account = await this.accountRepo.findOne({googleId: authData.id});
@@ -73,8 +73,10 @@ export class AccountService {
               const account = new Account();
               account.googleId = authData.id;
               account.email = authData.email;
-              // @todo handle nickname
-              account.name = 'test-kek-1';
+              account.displayName = authData.name;
+              if (!account.displayName) {
+                throw new Error('Name is not present in google auth data!');
+              }
               await this.accountRepo.save(account);
               resolve({
                 accountId: account.id,
@@ -116,15 +118,20 @@ export class AccountService {
     });
   }
 
-  async updateSettings(id: number, form: {about: string, pictureData: string}): Promise<Account> {
+  async updateSettings(id: number, form: {displayName: string, about: string, pictureData: string}): Promise<Account> {
     const account = await this.accountRepo.findOne({id});
     if (account) {
-      account.about = form.about;
-      if (form.pictureData) {
-        // @todo clear picture
-        account.picture = this.savePicture.save('pictures/profile', account.id, form.pictureData);
+      if (form.displayName) {
+        account.displayName = form.displayName;
+        account.about = form.about;
+        if (form.pictureData) {
+          // @todo clear picture
+          account.picture = this.savePicture.save('pictures/profile', account.id, form.pictureData);
+        }
+        return this.accountRepo.save(account);
+      } else {
+        throw new Error('Display name should be passed!');
       }
-      return this.accountRepo.save(account);
     }
   }
 

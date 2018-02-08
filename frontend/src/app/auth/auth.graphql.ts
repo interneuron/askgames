@@ -30,7 +30,7 @@ export const getAuthAccount = gql`
   query getAuthAccount {
     authAccount {
       id
-      name
+      displayName
       email
     }
   }

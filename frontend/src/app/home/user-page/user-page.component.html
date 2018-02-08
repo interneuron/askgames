@@ -1,6 +1,6 @@
 <div class="main-container">
-  <ng-container *ngIf="(data | async)?.accountByName; let account">
-    <h1>{{ account.name }}</h1>
+  <ng-container *ngIf="(data | async)?.account; let account">
+    <h1>{{ account.displayName }}</h1>
     <div class="topics">
       <app-topic-panel *ngFor="let topic of account.topics"
                        [topic]="topic">
