@@ -14,6 +14,15 @@ export const authGql = {
       }
     }
   `,
+  registration: gql`
+    mutation registration($form: RegistrationForm){
+      registration(form: $form) {
+        accountId
+        token
+        error
+      }
+    }
+  `,
 };
 
 export const createSession = gql`

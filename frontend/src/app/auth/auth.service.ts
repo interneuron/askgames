@@ -8,7 +8,7 @@ import { ApiService } from '../api/api.service';
 import {
   createGoogleSessionMutation, createGoogleSessionMutationVariables,
   createSessionMutation, createSessionMutationVariables, DestroySessionMutation,
-  getAuthAccountQuery,
+  getAuthAccountQuery, registrationMutation, registrationMutationVariables,
 } from '../graphql-meta';
 import { authGql, createSession, getAuthAccount } from './auth.graphql';
 import { GoogleAuthService } from './google-auth.service';
@@ -103,6 +103,20 @@ export class AuthService {
         return this.sessionHandler('createGoogleSession', res);
       }),
     );
+  }
+
+  registration(variables: registrationMutationVariables): Observable<{success: boolean; error?: string}> {
+    return this.apollo
+      .mutate<registrationMutation, registrationMutationVariables>({
+        mutation: authGql.registration,
+        variables,
+      })
+      .pipe(
+        map(res => res.data),
+        map((res: registrationMutation) => {
+          return this.sessionHandler('registration', res);
+        }),
+      );
   }
 
   private loadAuthAccount() {

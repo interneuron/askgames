@@ -8,25 +8,10 @@ import { AuthService } from '../auth.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AuthModalComponent implements OnInit {
-  form = {
-    email: '',
-    password: '',
-  };
-
   constructor(private authService: AuthService) {
   }
 
   ngOnInit() {
-  }
-
-  submit() {
-    this.authService.createSession(this.form).subscribe(res => {
-      if (res.success) {
-        alert('LOGIN IS SUCCESS');
-      } else {
-        alert(res.error);
-      }
-    });
   }
 
   googleAuth() {

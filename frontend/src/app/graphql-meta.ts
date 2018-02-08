@@ -7,6 +7,12 @@ export interface SettingsForm {
   pictureData?: string | null,
 };
 
+export interface RegistrationForm {
+  displayName: string,
+  email: string,
+  password: string,
+};
+
 export interface getSettingsAccountQueryVariables {
   id: number,
 };
@@ -64,6 +70,18 @@ export interface createGoogleSessionMutationVariables {
 
 export interface createGoogleSessionMutation {
   createGoogleSession:  {
+    accountId: number | null,
+    token: string | null,
+    error: string | null,
+  } | null,
+};
+
+export interface registrationMutationVariables {
+  form?: RegistrationForm | null,
+};
+
+export interface registrationMutation {
+  registration:  {
     accountId: number | null,
     token: string | null,
     error: string | null,

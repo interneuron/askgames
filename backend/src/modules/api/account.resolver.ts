@@ -22,13 +22,13 @@ export class AccountResolver {
   }
 
   @Query()
-  async account(obj, args, context, info) {
-    return await this.accountService.findById(args.id);
+  account(obj, args, context, info) {
+    return this.accountService.findById(args.id);
   }
 
   @Query()
-  async accountByName(obj, args, context, info) {
-    return await this.accountService.findByName(args.name);
+  accountByName(obj, args, context, info) {
+    return this.accountService.findByName(args.name);
   }
 
   @ResolveProperty()
@@ -37,13 +37,13 @@ export class AccountResolver {
   }
 
   @Mutation()
-  async createSession(obj, {email, password}) {
-    return await this.accountService.createSession(email, password);
+  createSession(obj, {email, password}) {
+    return this.accountService.createSession(email, password);
   }
 
   @Mutation()
-  async createGoogleSession(obj, {id, access_token}) {
-    return await this.accountService.createGoogleSession(id, access_token);
+  createGoogleSession(obj, {id, access_token}) {
+    return this.accountService.createGoogleSession(id, access_token);
   }
 
   @Mutation()
@@ -63,5 +63,10 @@ export class AccountResolver {
     } else {
       return {};
     }
+  }
+
+  @Mutation()
+  registration(obj, {form}) {
+    return this.accountService.registration(form);
   }
 }

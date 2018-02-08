@@ -1,5 +1,5 @@
 import { Component, Inject } from '@nestjs/common';
-import { compareSync } from 'bcryptjs';
+import { compareSync, hashSync } from 'bcryptjs';
 import * as request from 'request';
 import { Repository } from 'typeorm';
 import { config } from '../../config';
@@ -7,7 +7,7 @@ import { uuid } from '../../util/uuid';
 import { SavePictureService } from '../helpers/save-picture.service';
 import { StateService } from '../state/state.service';
 import { Account } from './account.entity';
-import { accountRepoToken, CreateSessionResponse } from './meta';
+import { accountRepoToken, CreateSessionResponse, RegistrationResponse } from './meta';
 
 @Component()
 export class AccountService {
@@ -36,7 +36,6 @@ export class AccountService {
     this.state.client.keys('*', function (err, res) {
     });
     if (account) {
-      // const hash = hashSync(password); <-- need for registration
       if (compareSync(password, account.password)) {
         return {
           accountId: account.id,
@@ -132,6 +131,27 @@ export class AccountService {
       } else {
         throw new Error('Display name should be passed!');
       }
+    }
+  }
+
+  async registration(form: {displayName: string; email: string; password: string}): Promise<RegistrationResponse> {
+    const account = await this.accountRepo.findOne({email: form.email});
+    if (!account) {
+      if (form.displayName && form.email && form.password) {
+        const newAccount = new Account();
+        newAccount.displayName = form.displayName;
+        newAccount.email = form.email;
+        newAccount.password = hashSync(form.password);
+        await this.accountRepo.save(newAccount);
+        return {
+          accountId: newAccount.id,
+          token: this.genSession(newAccount.id),
+        };
+      } else {
+        return {error: 'invalid_data'};
+      }
+    } else {
+      return {error: 'email_exists'};
     }
   }
 

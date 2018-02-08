@@ -1,0 +1,22 @@
+<div class="form">
+  <ui-form-field label="Name">
+    <input uiText
+           name="displayName"
+           [(ngModel)]="form.displayName"
+           required>
+  </ui-form-field>
+  <ui-form-field label="Email">
+    <input uiText
+           name="email"
+           [(ngModel)]="form.email"
+           required>
+  </ui-form-field>
+  <ui-form-field label="Password">
+    <input uiText
+           name="password"
+           type="password"
+           [(ngModel)]="form.password"
+           required>
+  </ui-form-field>
+  <button uiButton (click)="submit()">Submit</button>
+</div>
