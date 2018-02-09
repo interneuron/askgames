@@ -1,0 +1,9 @@
+<ng-container *ngIf="answers">
+  <div *ngFor="let answer of answers.entries" class="answer">
+    <h3>{{ answer.topic.game.name }} > {{ answer.topic.title }}</h3>
+    {{ answer.text }}
+  </div>
+  <div *ngIf="answers.nextPageToken">
+    <button (click)="nextPage()">Next &rarr;</button>
+  </div>
+</ng-container>

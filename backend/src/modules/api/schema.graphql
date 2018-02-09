@@ -5,8 +5,8 @@ type Topic {
     text: String
     game: Game
     author: Account
-    answers: [TopicAnswer]
-    comments: [TopicComment]
+    answers: [Answer]
+    comments: [Comment]
 }
 
 type Topics {
@@ -19,15 +19,21 @@ type Game {
     name: String
 }
 
-type TopicAnswer {
+type Answer {
     id: Int!
     text: String
     rate: Int
     author: Account
-    comments: [TopicComment]
+    topic: Topic
+    comments: [Comment]
 }
 
-type TopicComment {
+type Answers {
+    entries: [Answer]
+    nextPageToken: Int
+}
+
+type Comment {
     id: Int!
     text: String
     author: Account
@@ -63,6 +69,7 @@ type Query {
     topic(id: Int!): Topic
     latestTopics(gameId: Int, accountId: Int): [Topic]
     topics(gameId: Int, accountId: Int, nextPageToken: Int): Topics
+    answers(accountId: Int, nextPageToken: Int): Answers
     game(id: Int!): Game
     account(id: Int!): Account
     accountByName(name: String!): Account

@@ -4,8 +4,7 @@ import { KitLoadingBarService } from '@ngx-kit/core';
 import { Apollo } from 'apollo-angular';
 import { distinctUntilChanged, map, pluck, switchMap, tap } from 'rxjs/operators';
 import {
-  getUserPageQuery, getUserPageQueryVariables, getUserTopicsQuery, getUserTopicsQueryVariables, UserPageAccountFragment,
-  UserPageTopicsFragment,
+  getUserPageQuery, getUserPageQueryVariables, UserPageAccountFragment,
 } from '../../graphql-meta';
 import { homeGql } from '../home.graphql';
 
@@ -18,8 +17,6 @@ import { homeGql } from '../home.graphql';
 export class UserPageComponent implements OnInit {
   account: UserPageAccountFragment;
 
-  topics: UserPageTopicsFragment;
-
   constructor(
     private router: ActivatedRoute,
     private loadingBar: KitLoadingBarService,
@@ -29,7 +26,7 @@ export class UserPageComponent implements OnInit {
   }
 
   ngOnInit() {
-    const lb = 'account';
+    const lb = 'user-page';
     this.router.params
       .pipe(
         pluck('id'),
@@ -43,31 +40,9 @@ export class UserPageComponent implements OnInit {
             variables: {id},
           })),
         map(d => d.data),
-        tap(() => {
-          this.loadingBar.end(lb);
-        }),
       )
       .subscribe((res: getUserPageQuery) => {
         this.account = res.account;
-        this.topics = res.account.topics;
-        this.cdr.markForCheck();
-      });
-  }
-
-  nextPage() {
-    const lb = 'account';
-    this.loadingBar.start(lb);
-    this.apollo
-      .query<getUserTopicsQuery, getUserTopicsQueryVariables>({
-        query: homeGql.getUserTopics,
-        variables: {
-          accountId: this.account.id,
-          nextPageToken: this.topics.nextPageToken,
-        },
-      })
-      .pipe(map(d => d.data))
-      .subscribe((res: getUserTopicsQuery) => {
-        this.topics = res.topics;
         this.loadingBar.end(lb);
         this.cdr.markForCheck();
       });

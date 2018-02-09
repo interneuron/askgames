@@ -19,18 +19,27 @@ export const homeGqlFragments = {
       nextPageToken
     }
   `,
+  userPageAnswers: gql`
+    ${topicGqlFragments.topicPanel}
+    fragment UserPageAnswers on Answers {
+      entries {
+        id
+        text
+        topic {
+          ...TopicPanel
+        }
+      }
+      nextPageToken
+    }
+  `,
 };
 
 export const homeGql = {
   getUserPage: gql`
     ${homeGqlFragments.userPageAccount}
-    ${homeGqlFragments.userPageTopics}
     query getUserPage($id: Int!) {
       account(id: $id) {
         ...UserPageAccount
-        topics {
-          ...UserPageTopics
-        }
       }
     }
   `,
@@ -42,5 +51,12 @@ export const homeGql = {
       }
     }
   `,
+  getUserAnswers: gql`
+    ${homeGqlFragments.userPageAnswers}
+    query getUserAnswers($accountId: Int!, $nextPageToken: Int) {
+      answers(accountId: $accountId, nextPageToken: $nextPageToken) {
+        ...UserPageAnswers
+      }
+    }
+  `,
 };
-

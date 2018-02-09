@@ -7,6 +7,8 @@ import { UiSideNavModule } from '../ui/ui-side-nav/ui-side-nav.module';
 import { UserPageComponent } from './user-page/user-page.component';
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home/home.component';
+import { UserPageTopicsComponent } from './user-page-topics/user-page-topics.component';
+import { UserPageAnswersComponent } from './user-page-answers/user-page-answers.component';
 
 @NgModule({
   imports: [
@@ -20,6 +22,8 @@ import { HomeComponent } from './home/home.component';
   declarations: [
     HomeComponent,
     UserPageComponent,
+    UserPageTopicsComponent,
+    UserPageAnswersComponent,
   ],
 })
 export class HomeModule {

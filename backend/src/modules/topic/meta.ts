@@ -1,3 +1,3 @@
 export const topicRepoToken = 'topicRepositoryToken';
-export const topicAnswerRepoToken = 'topicAnswerRepositoryToken';
-export const topicCommentRepoToken = 'topicCommentRepositoryToken';
+export const answerRepoToken = 'answerRepositoryToken';
+export const commentRepoToken = 'commentRepositoryToken';

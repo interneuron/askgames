@@ -1,13 +1,12 @@
 <div class="main-container">
   <ng-container *ngIf="account">
     <h1>{{ account.displayName }}</h1>
-    <div class="topics">
-      <app-topic-panel *ngFor="let topic of topics.entries"
-                       [topic]="topic">
-      </app-topic-panel>
-      <div *ngIf="topics.nextPageToken">
-        <button (click)="nextPage()">Next &rarr;</button>
-      </div>
+    <div>
+      <a routerLink="topics">Topics</a>
+      <a routerLink="answers">Answers</a>
+    </div>
+    <div class="content">
+      <router-outlet></router-outlet>
     </div>
   </ng-container>
 </div>

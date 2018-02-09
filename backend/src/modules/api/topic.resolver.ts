@@ -44,7 +44,7 @@ export class TopicResolver {
 
   @ResolveProperty()
   answers(topic: Topic) {
-    return this.topicService.findAnswers(topic.id);
+    return this.topicService.findTopicAnswers(topic.id);
   }
 
   @ResolveProperty()

@@ -1,0 +1,8 @@
+<ng-container *ngIf="topics">
+  <app-topic-panel *ngFor="let topic of topics.entries"
+                   [topic]="topic">
+  </app-topic-panel>
+  <div *ngIf="topics.nextPageToken">
+    <button (click)="nextPage()">Next &rarr;</button>
+  </div>
+</ng-container>

@@ -1,14 +1,17 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity({
-  name: 'TopicAnswer',
+  name: 'TopicComment',
 })
-export class TopicAnswer {
+export class Comment {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column()
   topicId: number;
+
+  @Column()
+  answerId: number;
 
   @Column()
   accountId: number;
@@ -21,7 +24,4 @@ export class TopicAnswer {
 
   @Column()
   rate: number;
-
-  @Column()
-  block: boolean;
 }

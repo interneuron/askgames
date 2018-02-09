@@ -1,8 +1,8 @@
 import { Connection } from 'typeorm';
 import { dbConnectionToken } from '../db/meta';
-import { topicAnswerRepoToken, topicCommentRepoToken, topicRepoToken } from './meta';
-import { TopicAnswer } from './topic-answer.entity';
-import { TopicComment } from './topic-comment.entity';
+import { answerRepoToken, commentRepoToken, topicRepoToken } from './meta';
+import { Answer } from './answer.entity';
+import { Comment } from './comment.entity';
 import { Topic } from './topic.entity';
 
 export const topicProviders = [
@@ -12,13 +12,13 @@ export const topicProviders = [
     inject: [dbConnectionToken],
   },
   {
-    provide: topicAnswerRepoToken,
-    useFactory: (connection: Connection) => connection.getRepository(TopicAnswer),
+    provide: answerRepoToken,
+    useFactory: (connection: Connection) => connection.getRepository(Answer),
     inject: [dbConnectionToken],
   },
   {
-    provide: topicCommentRepoToken,
-    useFactory: (connection: Connection) => connection.getRepository(TopicComment),
+    provide: commentRepoToken,
+    useFactory: (connection: Connection) => connection.getRepository(Comment),
     inject: [dbConnectionToken],
   },
 ];

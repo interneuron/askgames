@@ -6,8 +6,8 @@ import { PaginatorService } from '../helpers/paginator.service';
 import { TopicModule } from '../topic/topic.module';
 import { AccountResolver } from './account.resolver';
 import { GameResolver } from './game.resolver';
-import { TopicAnswerResolver } from './topic-answer.resolver';
-import { TopicCommentResolver } from './topic-comment.resolver';
+import { AnswerResolver } from './answer.resolver';
+import { CommentResolver } from './comment.resolver';
 import { TopicResolver } from './topic.resolver';
 
 @Module({
@@ -21,8 +21,8 @@ import { TopicResolver } from './topic.resolver';
     AccountResolver,
     GameResolver,
     TopicResolver,
-    TopicAnswerResolver,
-    TopicCommentResolver,
+    AnswerResolver,
+    CommentResolver,
     PaginatorService,
   ],
   exports: [],

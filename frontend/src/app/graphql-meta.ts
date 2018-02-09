@@ -128,18 +128,6 @@ export interface getUserPageQuery {
     displayName: string | null,
     picture: string | null,
     about: string | null,
-    topics:  {
-      entries:  Array< {
-        id: number,
-        title: string | null,
-        text: string | null,
-        game:  {
-          id: number,
-          name: string | null,
-        } | null,
-      } | null > | null,
-      nextPageToken: number | null,
-    } | null,
   } | null,
 };
 
@@ -157,6 +145,30 @@ export interface getUserTopicsQuery {
       game:  {
         id: number,
         name: string | null,
+      } | null,
+    } | null > | null,
+    nextPageToken: number | null,
+  } | null,
+};
+
+export interface getUserAnswersQueryVariables {
+  accountId: number,
+  nextPageToken?: number | null,
+};
+
+export interface getUserAnswersQuery {
+  answers:  {
+    entries:  Array< {
+      id: number,
+      text: string | null,
+      topic:  {
+        id: number,
+        title: string | null,
+        text: string | null,
+        game:  {
+          id: number,
+          name: string | null,
+        } | null,
       } | null,
     } | null > | null,
     nextPageToken: number | null,
@@ -234,6 +246,23 @@ export interface UserPageTopicsFragment {
     game:  {
       id: number,
       name: string | null,
+    } | null,
+  } | null > | null,
+  nextPageToken: number | null,
+};
+
+export interface UserPageAnswersFragment {
+  entries:  Array< {
+    id: number,
+    text: string | null,
+    topic:  {
+      id: number,
+      title: string | null,
+      text: string | null,
+      game:  {
+        id: number,
+        name: string | null,
+      } | null,
     } | null,
   } | null > | null,
   nextPageToken: number | null,
