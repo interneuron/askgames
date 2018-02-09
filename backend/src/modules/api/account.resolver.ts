@@ -1,6 +1,8 @@
 import { Mutation, Query, ResolveProperty, Resolver } from '@nestjs/graphql';
+import { config } from '../../config';
 import { Account } from '../account/account.entity';
 import { AccountService } from '../account/account.service';
+import { PaginatorService } from '../helpers/paginator.service';
 import { TopicService } from '../topic/topic.service';
 
 @Resolver('Account')
@@ -8,6 +10,7 @@ export class AccountResolver {
   constructor(
       private accountService: AccountService,
       private topicService: TopicService,
+      private paginator: PaginatorService,
   ) {
   }
 
@@ -32,8 +35,8 @@ export class AccountResolver {
   }
 
   @ResolveProperty()
-  topics(account: Account) {
-    return this.topicService.findLatest(20, {accountId: account.id});
+  async topics(account: Account) {
+    return this.paginator.wrap(await this.topicService.findLatest({accountId: account.id}));
   }
 
   @Mutation()

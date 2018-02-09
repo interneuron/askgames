@@ -1,11 +1,13 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { KitLoadingBarService } from '@ngx-kit/core';
 import { Apollo } from 'apollo-angular';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { distinctUntilChanged, map, pluck, switchMap, tap } from 'rxjs/operators';
-import { accountGql } from '../../account/account.graphql';
-import { getUserPageQuery, getUserPageQueryVariables } from '../../graphql-meta';
+import {
+  getUserPageQuery, getUserPageQueryVariables, getUserTopicsQuery, getUserTopicsQueryVariables, UserPageAccountFragment,
+  UserPageTopicsFragment,
+} from '../../graphql-meta';
+import { homeGql } from '../home.graphql';
 
 @Component({
   selector: 'app-account-page',
@@ -14,12 +16,15 @@ import { getUserPageQuery, getUserPageQueryVariables } from '../../graphql-meta'
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserPageComponent implements OnInit {
-  data = new BehaviorSubject<getUserPageQuery>(null);
+  account: UserPageAccountFragment;
+
+  topics: UserPageTopicsFragment;
 
   constructor(
     private router: ActivatedRoute,
     private loadingBar: KitLoadingBarService,
     private apollo: Apollo,
+    private cdr: ChangeDetectorRef,
   ) {
   }
 
@@ -34,7 +39,7 @@ export class UserPageComponent implements OnInit {
         }),
         switchMap((id: number) => this.apollo
           .query<getUserPageQuery, getUserPageQueryVariables>({
-            query: accountGql.getUserPage,
+            query: homeGql.getUserPage,
             variables: {id},
           })),
         map(d => d.data),
@@ -42,6 +47,29 @@ export class UserPageComponent implements OnInit {
           this.loadingBar.end(lb);
         }),
       )
-      .subscribe(this.data);
+      .subscribe((res: getUserPageQuery) => {
+        this.account = res.account;
+        this.topics = res.account.topics;
+        this.cdr.markForCheck();
+      });
+  }
+
+  nextPage() {
+    const lb = 'account';
+    this.loadingBar.start(lb);
+    this.apollo
+      .query<getUserTopicsQuery, getUserTopicsQueryVariables>({
+        query: homeGql.getUserTopics,
+        variables: {
+          accountId: this.account.id,
+          nextPageToken: this.topics.nextPageToken,
+        },
+      })
+      .pipe(map(d => d.data))
+      .subscribe((res: getUserTopicsQuery) => {
+        this.topics = res.topics;
+        this.loadingBar.end(lb);
+        this.cdr.markForCheck();
+      });
   }
 }

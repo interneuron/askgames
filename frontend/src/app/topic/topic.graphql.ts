@@ -1,5 +1,19 @@
 import gql from 'graphql-tag';
 
+export const topicGqlFragments = {
+  topicPanel: gql`
+    fragment TopicPanel on Topic {
+      id
+      title
+      text
+      game {
+        id
+        name
+      }
+    }
+  `,
+};
+
 export const getLatestTopics = gql`
   query getLatestTopics {
     latestTopics {
@@ -34,7 +48,7 @@ export const getTopic = gql`
         author {
           id
           displayName
-        }        
+        }
       }
       answers {
         id

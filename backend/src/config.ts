@@ -14,6 +14,7 @@ export interface Config {
     clientId: string,
   }
   storePath: string,
+  pageSize: number,
 }
 
 export const config: Config = require('../config.json');

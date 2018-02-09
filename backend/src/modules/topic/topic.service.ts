@@ -1,5 +1,6 @@
 import { Component, Inject } from '@nestjs/common';
 import { Repository } from 'typeorm';
+import { config } from '../../config';
 import { topicAnswerRepoToken, topicCommentRepoToken, topicRepoToken } from './meta';
 import { TopicAnswer } from './topic-answer.entity';
 import { TopicComment } from './topic-comment.entity';
@@ -14,12 +15,23 @@ export class TopicService {
   ) {
   }
 
-  async findLatest(take, params: any): Promise<Topic[]> {
-    return await this.topicRepo.find({
-      take,
-      where: {block: false, ...params},
-      order: {datetime: 'DESC'},
-    });
+  async findLatest(params: any): Promise<Topic[]> {
+    const query = this.topicRepo.createQueryBuilder()
+        .take(config.pageSize + 1)
+        .where({block: false})
+        .addOrderBy('datetime', 'DESC');
+    if (params.accountId) {
+      query.where({accountId: params.accountId});
+    }
+    if (params.nextPageToken) {
+      query.andWhere('id <= :token', {token: params.nextPageToken});
+    }
+    return query.getMany();
+//        .find({
+//      take: config.pageSize + 1,
+//      where: {block: false, ...params},
+//      order: {datetime: 'DESC'},
+//    });
   }
 
   async findById(id: number): Promise<Topic> {

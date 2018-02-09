@@ -9,6 +9,11 @@ type Topic {
     comments: [TopicComment]
 }
 
+type Topics {
+    entries: [Topic]
+    nextPageToken: Int
+}
+
 type Game {
     id: Int!
     name: String
@@ -39,7 +44,7 @@ type Account {
     socialYt: String
     socialTw: String
     website: String
-    topics: [Topic]
+    topics: Topics
 }
 
 type AuthAccount {
@@ -56,7 +61,8 @@ type Session {
 
 type Query {
     topic(id: Int!): Topic
-    latestTopics(gameId: Int): [Topic]
+    latestTopics(gameId: Int, accountId: Int): [Topic]
+    topics(gameId: Int, accountId: Int, nextPageToken: Int): Topics
     game(id: Int!): Game
     account(id: Int!): Account
     accountByName(name: String!): Account

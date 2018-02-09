@@ -1,6 +1,7 @@
 import { Query, ResolveProperty, Resolver } from '@nestjs/graphql';
 import { AccountService } from '../account/account.service';
 import { GameService } from '../game/game.service';
+import { PaginatorService } from '../helpers/paginator.service';
 import { Topic } from '../topic/topic.entity';
 import { TopicService } from '../topic/topic.service';
 
@@ -10,6 +11,7 @@ export class TopicResolver {
       private topicService: TopicService,
       private gameService: GameService,
       private accountService: AccountService,
+      private paginator: PaginatorService,
   ) {
   }
 
@@ -24,7 +26,15 @@ export class TopicResolver {
     if (args.gameId) {
       params.gameId = args.gameId;
     }
-    return this.topicService.findLatest(20, params);
+    if (args.accountId) {
+      params.accountId = args.accountId;
+    }
+    return this.topicService.findLatest(params);
+  }
+
+  @Query()
+  async topics(obj, args) {
+    return this.paginator.wrap(await this.topicService.findLatest(args));
   }
 
   @ResolveProperty()

@@ -19,23 +19,4 @@ export const accountGql = {
       }
     }
   `,
-  getUserPage: gql`
-    query getUserPage($id: Int!) {
-      account(id: $id) {
-        id
-        displayName
-        picture
-        about
-        topics {
-          id
-          title
-          text
-          game {
-            id
-            name
-          }
-        }
-      }
-    }
-  `,
 };

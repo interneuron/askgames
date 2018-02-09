@@ -37,28 +37,6 @@ export interface updateSettingsMutation {
   } | null,
 };
 
-export interface getUserPageQueryVariables {
-  id: number,
-};
-
-export interface getUserPageQuery {
-  account:  {
-    id: number,
-    displayName: string | null,
-    picture: string | null,
-    about: string | null,
-    topics:  Array< {
-      id: number,
-      title: string | null,
-      text: string | null,
-      game:  {
-        id: number,
-        name: string | null,
-      } | null,
-    } | null > | null,
-  } | null,
-};
-
 export interface DestroySessionMutation {
   destroySession: boolean | null,
 };
@@ -140,6 +118,51 @@ export interface getGameLatestTopicsQuery {
   } | null > | null,
 };
 
+export interface getUserPageQueryVariables {
+  id: number,
+};
+
+export interface getUserPageQuery {
+  account:  {
+    id: number,
+    displayName: string | null,
+    picture: string | null,
+    about: string | null,
+    topics:  {
+      entries:  Array< {
+        id: number,
+        title: string | null,
+        text: string | null,
+        game:  {
+          id: number,
+          name: string | null,
+        } | null,
+      } | null > | null,
+      nextPageToken: number | null,
+    } | null,
+  } | null,
+};
+
+export interface getUserTopicsQueryVariables {
+  accountId: number,
+  nextPageToken?: number | null,
+};
+
+export interface getUserTopicsQuery {
+  topics:  {
+    entries:  Array< {
+      id: number,
+      title: string | null,
+      text: string | null,
+      game:  {
+        id: number,
+        name: string | null,
+      } | null,
+    } | null > | null,
+    nextPageToken: number | null,
+  } | null,
+};
+
 export interface getLatestTopicsQuery {
   latestTopics:  Array< {
     id: number,
@@ -193,5 +216,35 @@ export interface getTopicQuery {
         } | null,
       } | null > | null,
     } | null > | null,
+  } | null,
+};
+
+export interface UserPageAccountFragment {
+  id: number,
+  displayName: string | null,
+  picture: string | null,
+  about: string | null,
+};
+
+export interface UserPageTopicsFragment {
+  entries:  Array< {
+    id: number,
+    title: string | null,
+    text: string | null,
+    game:  {
+      id: number,
+      name: string | null,
+    } | null,
+  } | null > | null,
+  nextPageToken: number | null,
+};
+
+export interface TopicPanelFragment {
+  id: number,
+  title: string | null,
+  text: string | null,
+  game:  {
+    id: number,
+    name: string | null,
   } | null,
 };

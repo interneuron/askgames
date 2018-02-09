@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { AccountModule } from '../account/account.module';
 import { DbModule } from '../db/db.module';
 import { GameModule } from '../game/game.module';
+import { PaginatorService } from '../helpers/paginator.service';
 import { TopicModule } from '../topic/topic.module';
 import { AccountResolver } from './account.resolver';
 import { GameResolver } from './game.resolver';
@@ -22,6 +23,7 @@ import { TopicResolver } from './topic.resolver';
     TopicResolver,
     TopicAnswerResolver,
     TopicCommentResolver,
+    PaginatorService,
   ],
   exports: [],
 })
