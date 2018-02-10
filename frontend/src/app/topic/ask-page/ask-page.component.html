@@ -1,0 +1,22 @@
+<div class="main-container">
+  <form #ngForm="ngForm">
+    <ui-form-field label="Game ID">
+      <input uiText
+             name="gameId"
+             [(ngModel)]="form.gameId"
+             required>
+    </ui-form-field>
+    <ui-form-field label="Title">
+      <input uiText
+             name="title"
+             [(ngModel)]="form.title"
+             required>
+    </ui-form-field>
+    <ui-form-field label="Description">
+      <textarea uiText
+                name="text"
+                [(ngModel)]="form.text"></textarea>
+    </ui-form-field>
+    <button (click)="submit()">Submit</button>
+  </form>
+</div>

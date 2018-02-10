@@ -93,10 +93,23 @@ input RegistrationForm {
     password: String!
 }
 
+input CreateTopicForm {
+    gameId: Int!
+    title: String!
+    text: String
+}
+
+type CreateTopicResult {
+    success: Boolean
+    topic: Topic
+    error: String
+}
+
 type Mutation {
     createSession(email: String!, password: String!): Session
     createGoogleSession(id: String!, access_token: String!): Session
     destroySession: Boolean
     updateSettings(form: SettingsForm): FormResult
     registration(form: RegistrationForm): Session
+    createTopic(form: CreateTopicForm): CreateTopicResult
 }

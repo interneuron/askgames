@@ -1,4 +1,4 @@
-import { Query, ResolveProperty, Resolver } from '@nestjs/graphql';
+import { Mutation, Query, ResolveProperty, Resolver } from '@nestjs/graphql';
 import { AccountService } from '../account/account.service';
 import { GameService } from '../game/game.service';
 import { PaginatorService } from '../helpers/paginator.service';
@@ -55,5 +55,21 @@ export class TopicResolver {
   @ResolveProperty()
   comments(topic: Topic) {
     return this.topicService.findCommentsByTopicId(topic.id);
+  }
+
+  @Mutation()
+  async createTopic(obj, {form}) {
+    const accountId = await this.accountService.isAuth(obj.headers['auth-token']);
+    if (accountId) {
+      return {
+        success: true,
+        topic: await this.topicService.createTopic(accountId, form),
+      };
+    } else {
+      return {
+        success: false,
+        error: 'auth-error',
+      };
+    }
   }
 }

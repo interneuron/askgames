@@ -3,7 +3,8 @@
   <div class="mid"></div>
   <div *ngIf="authAccountChanges | async; let authAccount" class="auth -auth">
     Hello, {{ authAccount.displayName }}!
-    <button kitAnchor #menuAnchor="anchor" (click)="displayMenu = true">Menu</button>
+    <button uiButton color="primary" routerLink="/q/ask">Ask</button>
+    <button uiButton kitAnchor #menuAnchor="anchor" (click)="displayMenu = true">Menu</button>
     <ui-dropdown *kitOverlay="displayMenu"
                  [anchor]="menuAnchor"
                  position="bottom-left"

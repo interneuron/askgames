@@ -4,7 +4,7 @@ import { KitLoadingBarService, KitNotificationService } from '@ngx-kit/core';
 import { Apollo } from 'apollo-angular';
 import { AuthService } from '../../auth/auth.service';
 import {
-  getSettingsAccountQuery, getSettingsAccountQueryVariables, updateSettingsMutation,
+  getSettingsAccountQuery, getSettingsAccountQueryVariables, SettingsForm, updateSettingsMutation,
   updateSettingsMutationVariables,
 } from '../../graphql-meta';
 import { resizeImage } from '../../util/resize-image';
@@ -21,11 +21,7 @@ export class SettingsPageComponent implements OnInit {
 
   loaded = false;
 
-  form: {
-    displayName: string;
-    about?: string;
-    pictureData?: string;
-  };
+  form: SettingsForm;
 
   accountPicture: string;
 

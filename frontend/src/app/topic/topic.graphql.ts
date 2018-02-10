@@ -1,5 +1,23 @@
 import gql from 'graphql-tag';
 
+export const topicGql = {
+  createTopic: gql`
+    mutation createTopic($form: CreateTopicForm){
+      createTopic(form: $form) {
+        success
+        topic {
+          id
+          title
+          game {
+            name
+          }
+        }
+        error
+      }
+    }
+  `,
+};
+
 export const topicGqlFragments = {
   topicPanel: gql`
     fragment TopicPanel on Topic {

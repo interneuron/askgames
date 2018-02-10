@@ -58,4 +58,19 @@ export class TopicService {
   async findCommentsByAnswerId(answerId: number): Promise<Comment[]> {
     return await this.commentRepo.find({answerId});
   }
+
+  async createTopic(accountId: number, form: {gameId: number; title: string; text: string}): Promise<Topic> {
+    if (form.gameId && form.title) {
+      const topic = new Topic();
+      topic.accountId = accountId;
+      topic.gameId = form.gameId;
+      topic.title = form.title;
+      topic.text = form.text;
+      topic.rate = 0;
+      await this.topicRepo.save(topic);
+      return topic;
+    } else {
+      throw new Error('createTopic form invalid');
+    }
+  }
 }

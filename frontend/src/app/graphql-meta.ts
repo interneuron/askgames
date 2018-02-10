@@ -13,6 +13,12 @@ export interface RegistrationForm {
   password: string,
 };
 
+export interface CreateTopicForm {
+  gameId: number,
+  title: string,
+  text?: string | null,
+};
+
 export interface getSettingsAccountQueryVariables {
   id: number,
 };
@@ -172,6 +178,24 @@ export interface getUserAnswersQuery {
       } | null,
     } | null > | null,
     nextPageToken: number | null,
+  } | null,
+};
+
+export interface createTopicMutationVariables {
+  form?: CreateTopicForm | null,
+};
+
+export interface createTopicMutation {
+  createTopic:  {
+    success: boolean | null,
+    topic:  {
+      id: number,
+      title: string | null,
+      game:  {
+        name: string | null,
+      } | null,
+    } | null,
+    error: string | null,
   } | null,
 };
 

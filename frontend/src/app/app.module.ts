@@ -9,7 +9,7 @@ import { HttpLinkModule } from 'apollo-angular-link-http';
 import { ApiModule } from './api/api.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AuthModule } from './auth/auth.module';
+import { AuthForRootModule } from './auth/auth-for-root.module';
 import { HeaderModule } from './header/header.module';
 import { HomeModule } from './home/home.module';
 import { TopicForRootModule } from './topic/topic-for-root.module';
@@ -34,7 +34,7 @@ import { UiNotificationModule } from './ui/ui-notification/ui-notification.modul
     HeaderModule,
     TopicForRootModule,
     UiLoadingBarModule,
-    AuthModule.forRoot(),
+    AuthForRootModule,
     ApiModule,
     UiNotificationModule,
     HomeModule,

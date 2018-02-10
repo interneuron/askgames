@@ -1,6 +1,7 @@
 <ng-container *ngIf="gameData | async; let gameData">
   <div class="main-container head">
     <h1>{{ gameData.game.name }}</h1>
+    <a routerLink="/q/ask" [queryParams]="{gameId: gameData.game.id}">Ask a question</a>
   </div>
   <div class="main-container">
     <div class="side">
